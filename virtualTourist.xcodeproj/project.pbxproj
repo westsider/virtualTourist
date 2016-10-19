@@ -12,6 +12,8 @@
 		39321C181DB7DB19002EA3B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39321C161DB7DB19002EA3B3 /* Main.storyboard */; };
 		39321C1A1DB7DB19002EA3B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39321C191DB7DB19002EA3B3 /* Assets.xcassets */; };
 		39321C1D1DB7DB19002EA3B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39321C1B1DB7DB19002EA3B3 /* LaunchScreen.storyboard */; };
+		39321C251DB7F22E002EA3B3 /* FlickerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39321C241DB7F22E002EA3B3 /* FlickerAPI.swift */; };
+		39321C271DB7F2D0002EA3B3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39321C261DB7F2D0002EA3B3 /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		39321C191DB7DB19002EA3B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39321C1C1DB7DB19002EA3B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39321C1E1DB7DB19002EA3B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39321C241DB7F22E002EA3B3 /* FlickerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickerAPI.swift; sourceTree = "<group>"; };
+		39321C261DB7F2D0002EA3B3 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				39321C161DB7DB19002EA3B3 /* Main.storyboard */,
+				39321C241DB7F22E002EA3B3 /* FlickerAPI.swift */,
+				39321C261DB7F2D0002EA3B3 /* Photo.swift */,
 				39321C121DB7DB19002EA3B3 /* AppDelegate.swift */,
 				39321C141DB7DB19002EA3B3 /* ViewController.swift */,
 				39321C191DB7DB19002EA3B3 /* Assets.xcassets */,
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39321C271DB7F2D0002EA3B3 /* Photo.swift in Sources */,
 				39321C151DB7DB19002EA3B3 /* ViewController.swift in Sources */,
 				39321C131DB7DB19002EA3B3 /* AppDelegate.swift in Sources */,
+				39321C251DB7F22E002EA3B3 /* FlickerAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
