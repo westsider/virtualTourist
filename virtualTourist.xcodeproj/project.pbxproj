@@ -54,9 +54,9 @@
 		39321C111DB7DB19002EA3B3 /* virtualTourist */ = {
 			isa = PBXGroup;
 			children = (
+				39321C161DB7DB19002EA3B3 /* Main.storyboard */,
 				39321C121DB7DB19002EA3B3 /* AppDelegate.swift */,
 				39321C141DB7DB19002EA3B3 /* ViewController.swift */,
-				39321C161DB7DB19002EA3B3 /* Main.storyboard */,
 				39321C191DB7DB19002EA3B3 /* Assets.xcassets */,
 				39321C1B1DB7DB19002EA3B3 /* LaunchScreen.storyboard */,
 				39321C1E1DB7DB19002EA3B3 /* Info.plist */,
