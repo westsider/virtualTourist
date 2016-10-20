@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HZy-Yv-TuQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yc8-Uk-h81">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -22,10 +22,10 @@
             </objects>
             <point key="canvasLocation" x="-408" y="462"/>
         </scene>
-        <!--Travel Locations View Controller-->
+        <!--View Controller-->
         <scene sceneID="bjq-dl-OtQ">
             <objects>
-                <viewController id="kcQ-0E-Ic0" customClass="TravelLocationsViewController" customModule="virtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kcQ-0E-Ic0" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QV8-w5-rCu"/>
                         <viewControllerLayoutGuide type="bottom" id="VlF-I9-WiN"/>
@@ -73,9 +73,6 @@
                         <outlet property="editButton" destination="b7t-qB-fQG" id="YXW-j1-w8b"/>
                         <outlet property="labelStackView" destination="Dq9-Qf-Bcj" id="oyM-Iw-OLu"/>
                         <outlet property="mapView" destination="8r9-cH-M4C" id="1BJ-bR-dXd"/>
-                        <segue destination="Yc8-Uk-h81" kind="show" identifier="pinTapped" id="vBf-gk-7LL">
-                            <nil key="action"/>
-                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vcb-3e-XiA" sceneMemberID="firstResponder"/>
@@ -95,7 +92,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DMn-Ba-hQe"/>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jQd-Yd-j16">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jQd-Yd-j16" customClass="F">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="411" id="H1W-ZZ-pkM"/>
@@ -114,7 +111,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="Qho-LK-xAX" customClass="PhotoViewCell" customModule="virtualTourist" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="Qho-LK-xAX" customClass="FlickrPhotoCell" customModule="virtualTourist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -135,23 +132,15 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="GCU-1F-sJx" id="1QD-oa-WWz"/>
-                                            <outlet property="imageView" destination="QZc-ph-ZQc" id="Nvw-Ry-uK4"/>
+                                            <outlet property="imageView" destination="QZc-ph-ZQc" id="UmY-0h-se7"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="Yc8-Uk-h81" id="xQh-Bm-vYS"/>
-                                    <outlet property="delegate" destination="Yc8-Uk-h81" id="0fV-B1-jZs"/>
-                                </connections>
                             </collectionView>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAp-Ix-PVJ">
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="DwX-Gh-6MI"/>
-                                    <barButtonItem title="Refresh Photos" id="2qY-s9-vYQ">
-                                        <connections>
-                                            <action selector="toolbarButtonPressed:" destination="Yc8-Uk-h81" id="A5O-hA-pCM"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem title="Refresh Photos" id="2qY-s9-vYQ"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="vOz-bB-UdM"/>
                                 </items>
                             </toolbar>
@@ -170,14 +159,6 @@
                             <constraint firstItem="DMn-Ba-hQe" firstAttribute="trailing" secondItem="TAp-Ix-PVJ" secondAttribute="trailing" id="tsH-RN-UWp"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="collectionView" destination="jQd-Yd-j16" id="8Bz-4q-2np"/>
-                        <outlet property="collectionViewFlowLayout" destination="aWZ-nr-jXg" id="x08-JF-hd3"/>
-                        <outlet property="mapView" destination="DMn-Ba-hQe" id="Ute-ch-JdT"/>
-                        <outlet property="noImagesFoundLabel" destination="r6j-3g-lQM" id="2Oa-dm-gKr"/>
-                        <outlet property="toolbar" destination="TAp-Ix-PVJ" id="pIG-A4-eQX"/>
-                        <outlet property="toolbarButton" destination="2qY-s9-vYQ" id="lzT-Kh-DjN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mqz-Nx-OcZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
