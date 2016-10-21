@@ -5,7 +5,7 @@
 //  Created by Warren Hansen on 10/20/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-
+//  Help with displaying flickr images on collection view here
 //  https://www.raywenderlich.com/136159/uicollectionview-tutorial-getting-started
 
 import UIKit
@@ -35,7 +35,6 @@ private extension FlickrPhotosViewController {
 // MARK: extention for search text
 extension FlickrPhotosViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // 1
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         textField.addSubview(activityIndicator)
         activityIndicator.frame = textField.bounds
@@ -44,22 +43,16 @@ extension FlickrPhotosViewController : UITextFieldDelegate {
         flickr.searchFlickrForTerm(textField.text!) {
             results, error in
             
-            
             activityIndicator.removeFromSuperview()
             
-            
             if let error = error {
-                // 2
                 print("Error searching : \(error)")
                 return
             }
             
             if let results = results {
-                // 3
                 print("Found \(results.searchResults.count) matching \(results.searchTerm)")
                 self.searches.insert(results, at: 0)
-                
-                // 4
                 self.collectionView?.reloadData()
             }
         }
@@ -72,51 +65,41 @@ extension FlickrPhotosViewController : UITextFieldDelegate {
 
 // MARK: - UICollectionViewDataSource
 extension FlickrPhotosViewController {
-    //1
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return searches.count
     }
     
-    //2
     override func collectionView(_ collectionView: UICollectionView,numberOfItemsInSection section: Int) -> Int {
         return searches[section].searchResults.count
     }
     
-    //3
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,for: indexPath) as! FlickrPhotoCell
-        
         let flickrPhoto = photoForIndexPath(indexPath: indexPath)
         cell.backgroundColor = UIColor.white
-        //3
         cell.imageView.image = flickrPhoto.thumbnail
-
-        // Configure the cell
         return cell
     }
 }
 
 extension FlickrPhotosViewController : UICollectionViewDelegateFlowLayout {
-    //1
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //2
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
-        
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
-    //3
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
     
-    // 4
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
