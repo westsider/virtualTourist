@@ -22,10 +22,10 @@
             </objects>
             <point key="canvasLocation" x="-408" y="462"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="bjq-dl-OtQ">
             <objects>
-                <viewController id="kcQ-0E-Ic0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Map View Controller" title="Map View Controller" id="kcQ-0E-Ic0" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QV8-w5-rCu"/>
                         <viewControllerLayoutGuide type="bottom" id="VlF-I9-WiN"/>
@@ -91,11 +91,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DMn-Ba-hQe">
-                                <connections>
-                                    <outlet property="delegate" destination="Yc8-Uk-h81" id="Nrw-KR-EPj"/>
-                                </connections>
-                            </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jQd-Yd-j16" customClass="F">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -154,18 +149,11 @@
                             <constraint firstItem="TAp-Ix-PVJ" firstAttribute="top" secondItem="jQd-Yd-j16" secondAttribute="bottom" constant="7" id="1nq-DK-6tn"/>
                             <constraint firstItem="TAp-Ix-PVJ" firstAttribute="leading" secondItem="sQJ-fC-Kfz" secondAttribute="leading" id="4sO-TR-tth"/>
                             <constraint firstItem="jQd-Yd-j16" firstAttribute="leading" secondItem="TAp-Ix-PVJ" secondAttribute="leading" id="EOb-KW-0fR"/>
-                            <constraint firstItem="DMn-Ba-hQe" firstAttribute="trailing" secondItem="jQd-Yd-j16" secondAttribute="trailing" id="Exn-dd-nJZ"/>
                             <constraint firstItem="jQd-Yd-j16" firstAttribute="top" secondItem="3Er-OM-g0U" secondAttribute="bottom" constant="217" id="SYe-8D-9t9"/>
-                            <constraint firstItem="DMn-Ba-hQe" firstAttribute="leading" secondItem="jQd-Yd-j16" secondAttribute="leading" id="Shw-cD-ofg"/>
-                            <constraint firstItem="DMn-Ba-hQe" firstAttribute="top" secondItem="sQJ-fC-Kfz" secondAttribute="top" id="UP0-yF-DlI"/>
                             <constraint firstItem="jQd-Yd-j16" firstAttribute="trailing" secondItem="TAp-Ix-PVJ" secondAttribute="trailing" id="kKo-dc-3VW"/>
                             <constraint firstAttribute="trailing" secondItem="jQd-Yd-j16" secondAttribute="trailing" id="mb0-Nr-AVd"/>
-                            <constraint firstItem="jQd-Yd-j16" firstAttribute="top" secondItem="DMn-Ba-hQe" secondAttribute="bottom" constant="8" symbolic="YES" id="rdE-IH-Lwf"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="mapView" destination="DMn-Ba-hQe" id="6VI-bn-81T"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mqz-Nx-OcZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

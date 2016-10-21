@@ -14,7 +14,6 @@
 		39321C1D1DB7DB19002EA3B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39321C1B1DB7DB19002EA3B3 /* LaunchScreen.storyboard */; };
 		39321C251DB7F22E002EA3B3 /* FlickerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39321C241DB7F22E002EA3B3 /* FlickerAPI.swift */; };
 		39321C271DB7F2D0002EA3B3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39321C261DB7F2D0002EA3B3 /* Photo.swift */; };
-		39321C291DB7F429002EA3B3 /* FlickerPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39321C281DB7F429002EA3B3 /* FlickerPhotosViewController.swift */; };
 		39321C2B1DB7F57C002EA3B3 /* FlickrPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39321C2A1DB7F57C002EA3B3 /* FlickrPhotoCell.swift */; };
 		39321C2D1DB7FEEE002EA3B3 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39321C2C1DB7FEEE002EA3B3 /* PhotosViewController.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +28,6 @@
 		39321C1E1DB7DB19002EA3B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39321C241DB7F22E002EA3B3 /* FlickerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickerAPI.swift; sourceTree = "<group>"; };
 		39321C261DB7F2D0002EA3B3 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		39321C281DB7F429002EA3B3 /* FlickerPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickerPhotosViewController.swift; sourceTree = "<group>"; };
 		39321C2A1DB7F57C002EA3B3 /* FlickrPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrPhotoCell.swift; sourceTree = "<group>"; };
 		39321C2C1DB7FEEE002EA3B3 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +64,6 @@
 			children = (
 				39321C161DB7DB19002EA3B3 /* Main.storyboard */,
 				39321C2C1DB7FEEE002EA3B3 /* PhotosViewController.swift */,
-				39321C281DB7F429002EA3B3 /* FlickerPhotosViewController.swift */,
 				39321C2A1DB7F57C002EA3B3 /* FlickrPhotoCell.swift */,
 				39321C241DB7F22E002EA3B3 /* FlickerAPI.swift */,
 				39321C261DB7F2D0002EA3B3 /* Photo.swift */,
@@ -157,7 +154,6 @@
 				39321C131DB7DB19002EA3B3 /* AppDelegate.swift in Sources */,
 				39321C251DB7F22E002EA3B3 /* FlickerAPI.swift in Sources */,
 				39321C2D1DB7FEEE002EA3B3 /* PhotosViewController.swift in Sources */,
-				39321C291DB7F429002EA3B3 /* FlickerPhotosViewController.swift in Sources */,
 				39321C2B1DB7F57C002EA3B3 /* FlickrPhotoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +316,7 @@
 				39321C231DB7DB19002EA3B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
