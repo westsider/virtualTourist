@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bVq-ag-7A7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AWD-o4-9bF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -10,7 +10,7 @@
         <scene sceneID="jkA-q0-jCc">
             <objects>
                 <collectionViewController id="Mp4-6I-d6s" customClass="FlickrPhotosViewController" customModule="virtualTourist" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="lnH-XT-D4E">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="lnH-XT-D4E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -22,7 +22,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlickrCell" id="lG9-2g-tc0" customClass="FlickrPhotoCell" customModule="virtualTourist" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="88" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -63,7 +63,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccK-Od-wmT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2914.4000000000001" y="400.74962518740631"/>
+            <point key="canvasLocation" x="6076" y="405"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="lmB-aE-Ulz">
@@ -76,17 +76,20 @@
                             <outlet property="delegate" destination="bVq-ag-7A7" id="Z5z-Zp-6PG"/>
                         </connections>
                     </mapView>
+                    <navigationItem key="navigationItem" id="quD-Gs-mse"/>
                     <connections>
                         <outlet property="mapView" destination="V2R-vK-1zz" id="24F-3v-4bH"/>
+                        <segue destination="Mp4-6I-d6s" kind="presentation" identifier="toThePhotos" id="7eV-pA-1Ja"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Bd-GS-nth" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3599" y="406"/>
+            <point key="canvasLocation" x="4536.8000000000002" y="405.24737631184411"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="phI-Xv-Q4W">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TPE-xe-r4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2ab-EY-f3w" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SB6-Y6-g1k">
@@ -98,9 +101,29 @@
                         <segue destination="Mp4-6I-d6s" kind="relationship" relationship="rootViewController" id="noE-oU-ioz"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TPE-xe-r4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1975.2" y="401.64917541229386"/>
+            <point key="canvasLocation" x="5322" y="405"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mja-4a-dID">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AWD-o4-9bF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wco-SD-Kb3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bVq-ag-7A7" kind="relationship" relationship="rootViewController" id="2MR-yj-oAT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D9M-Gh-Rkq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3780" y="405"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7eV-pA-1Ja"/>
+    </inferredMetricsTieBreakers>
 </document>

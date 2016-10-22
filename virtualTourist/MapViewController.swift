@@ -33,19 +33,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         let region: MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
         
         mapView.setRegion(region, animated: true)
-//        
-//        // Add Annotation
-//        let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-//        
-//        let annotation = MKPointAnnotation()
-//        
-//        annotation.title = "Los Angeles"
-//        
-//        annotation.subtitle = "One day I'll go here..."
-//        
-//        annotation.coordinate = coordinates
-//        
-//        mapView.addAnnotation(annotation)
         
         // add user annotation
         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPress(gestureReconizer:)))
@@ -64,14 +51,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
     }
-    
-    // MARK: Touch Pin
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            performSegue(withIdentifier: "toThePhotos", sender: view)
-        }
+
+    // MARK: Tap Pin
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("Pin Tapped")
+        performSegue(withIdentifier: "toThePhotos", sender: self)
     }
     
-
-
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toThePhotos" {
+            _ = segue.destination as! FlickrPhotosViewController
+//            let annotation = sender as! Pin
+//            photosVC.pin = annotation
+            
+        }
+    }
 }

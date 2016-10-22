@@ -89,8 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				39321C161DB7DB19002EA3B3 /* Main.storyboard */,
-				39CBB46A1DBBFE0100FA552B /* MapViewController.swift */,
-				39321C2A1DB7F57C002EA3B3 /* FlickrPhotoCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -98,7 +96,9 @@
 		39DE1B631DBAFD6D00F5B3F5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				39CBB46A1DBBFE0100FA552B /* MapViewController.swift */,
 				395F38031DB9B300007EC90D /* FlickrPhotosViewController.swift */,
+				39321C2A1DB7F57C002EA3B3 /* FlickrPhotoCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
