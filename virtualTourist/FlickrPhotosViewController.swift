@@ -8,9 +8,10 @@
 //  Help with displaying flickr images on collection view here
 //  https://www.raywenderlich.com/136159/uicollectionview-tutorial-getting-started
 
-//  Use api to display photos for gps of venice 
+
 //  [ ] create map page view controller
 //  [ ] make a pin go to photos page
+//  Use api to display photos for gps of venice 
 //  [ ] Add Core-data elements
 //  store photos in core data
 //  add delete pin
