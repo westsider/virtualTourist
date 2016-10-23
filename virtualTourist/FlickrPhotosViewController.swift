@@ -7,12 +7,12 @@
 //
 //  Help with displaying flickr images on collection view here
 //  https://www.raywenderlich.com/136159/uicollectionview-tutorial-getting-started
+//  create map page view controller
+//  make a pin go to photos page
 
-
-//  [ ] create map page view controller
-//  [ ] make a pin go to photos page
-//  Use api to display photos for gps of venice 
-//  [ ] Add Core-data elements
+// stuck on segue to photos. wont show the vc
+//  Use api to display photos from pin
+//  Add Core-data elements
 //  store photos in core data
 //  add delete pin
 //  add reload photos
@@ -34,7 +34,19 @@ final class FlickrPhotosViewController: UICollectionViewController {
     
     fileprivate let itemsPerRow: CGFloat = 3
     
+    var passedIntext:String = ""
+    
 }
+
+//func searchPhotos() {
+//    flickrClientInstance.searchPhotos("\(pin.latitude)", longitude: "\(pin.longitude)") { photoURLS, error in
+//        guard let photoURLS = photoURLS else {
+//            return
+//        }
+//        self.savePhotos(photoURLS)
+//    }
+//    
+//}
 
 // MARK: - Private
 private extension FlickrPhotosViewController {
@@ -50,6 +62,7 @@ extension FlickrPhotosViewController : UITextFieldDelegate {
         textField.addSubview(activityIndicator)
         activityIndicator.frame = textField.bounds
         activityIndicator.startAnimating()
+        
         
         flickr.searchFlickrForTerm(textField.text!) {
             results, error in
@@ -68,7 +81,7 @@ extension FlickrPhotosViewController : UITextFieldDelegate {
             }
         }
         
-        textField.text = nil
+        textField.text = passedIntext
         textField.resignFirstResponder()
         return true
     }

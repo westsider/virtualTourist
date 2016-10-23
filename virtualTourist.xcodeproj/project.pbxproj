@@ -17,6 +17,7 @@
 		395F38091DB9B437007EC90D /* FlickrPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395F38061DB9B437007EC90D /* FlickrPhoto.swift */; };
 		395F380A1DB9B437007EC90D /* FlickrSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395F38071DB9B437007EC90D /* FlickrSearchResults.swift */; };
 		39CBB46B1DBBFE0100FA552B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBB46A1DBBFE0100FA552B /* MapViewController.swift */; };
+		39CBB46D1DBC2B9700FA552B /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBB46C1DBC2B9700FA552B /* Pin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		395F38061DB9B437007EC90D /* FlickrPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrPhoto.swift; sourceTree = "<group>"; };
 		395F38071DB9B437007EC90D /* FlickrSearchResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrSearchResults.swift; sourceTree = "<group>"; };
 		39CBB46A1DBBFE0100FA552B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		39CBB46C1DBC2B9700FA552B /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				395F38051DB9B437007EC90D /* Flickr.swift */,
 				395F38061DB9B437007EC90D /* FlickrPhoto.swift */,
 				395F38071DB9B437007EC90D /* FlickrSearchResults.swift */,
+				39CBB46C1DBC2B9700FA552B /* Pin.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				395F38041DB9B300007EC90D /* FlickrPhotosViewController.swift in Sources */,
 				395F380A1DB9B437007EC90D /* FlickrSearchResults.swift in Sources */,
 				39321C131DB7DB19002EA3B3 /* AppDelegate.swift in Sources */,
+				39CBB46D1DBC2B9700FA552B /* Pin.swift in Sources */,
 				395F38081DB9B437007EC90D /* Flickr.swift in Sources */,
 				395F38091DB9B437007EC90D /* FlickrPhoto.swift in Sources */,
 				39321C2B1DB7F57C002EA3B3 /* FlickrPhotoCell.swift in Sources */,

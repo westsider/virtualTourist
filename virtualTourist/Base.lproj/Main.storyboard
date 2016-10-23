@@ -63,7 +63,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccK-Od-wmT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6076" y="405"/>
+            <point key="canvasLocation" x="5286" y="405"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="lmB-aE-Ulz">
@@ -79,30 +79,11 @@
                     <navigationItem key="navigationItem" id="quD-Gs-mse"/>
                     <connections>
                         <outlet property="mapView" destination="V2R-vK-1zz" id="24F-3v-4bH"/>
-                        <segue destination="Mp4-6I-d6s" kind="presentation" identifier="toThePhotos" id="7eV-pA-1Ja"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Bd-GS-nth" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4536.8000000000002" y="405.24737631184411"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="phI-Xv-Q4W">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TPE-xe-r4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2ab-EY-f3w" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SB6-Y6-g1k">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Mp4-6I-d6s" kind="relationship" relationship="rootViewController" id="noE-oU-ioz"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="5322" y="405"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mja-4a-dID">
@@ -123,7 +104,4 @@
             <point key="canvasLocation" x="3780" y="405"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="7eV-pA-1Ja"/>
-    </inferredMetricsTieBreakers>
 </document>
