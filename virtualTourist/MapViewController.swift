@@ -9,13 +9,14 @@
 import UIKit
 import MapKit
 
+//var thisLocation:CLLocationCoordinate2D? = nil
+var thisPin:Pin? = nil
+
 class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var mapView: MKMapView!
+
     
-    //var ncc1701 = Starship(name: "Enterprise", prefix: "USS")
-    
-    var thisLocation:Pin? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         
         mapView.setRegion(region, animated: true)
         
+        
+        
         // add user annotation
         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPress(gestureReconizer:)))
         
@@ -51,10 +54,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     func longPress(gestureReconizer: UIGestureRecognizer) {
         let touchPoint = gestureReconizer.location(in: self.mapView)
         let coordinate = mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
+        let latitude = coordinate.latitude
+        let longitude = coordinate.longitude
+        
+        thisPin = Pin(coordinate: coordinate, latitude: latitude, longitude: longitude)
         let annotation = MKPointAnnotation()
+        
+        //thisPin = Pin(coordinate: coordinate, latitude: map, longitude: <#T##CLLocationDegrees#>)
+//        thisLocation = coordinate
+//        if thisLocation != nil {
+//             print("Setting the Pin: \(thisLocation!)")
+//        } else {
+//            print("The location is Nil")
+//        }
+       
+        
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
-        let thisPin = Pin(coordinate: coordinate)
+       
+        // let thisPin = Pin(coordinate: coordinate)
         
         /*
             let point = gestureRecognizer.locationInView(mapView)
@@ -70,16 +88,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
 
     // MARK: Tap Pin
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("Pin Tapped")
+        print("Pin Tapped Pin = \(thisPin!)")
         performSegue(withIdentifier: "toThePhotos", sender: self)
     }
     
-//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "toThePhotos" {
-//            let photosVC = segue.destination as! FlickrPhotosViewController
-//            photosVC.passedIntext = "Sending In A string"
-//        }
-//    }
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toThePhotos" {
+            //let photosVC = segue.destination as! FlickrPhotosViewController
+//            print("Prepare for Segue: \(thisLocation!))")
+//            photosVC.passedInPin = thisLocation
+        }
+    }
     
  
     

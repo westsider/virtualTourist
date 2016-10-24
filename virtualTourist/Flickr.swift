@@ -14,6 +14,7 @@ class Flickr {
     
     let processingQueue = OperationQueue()
     
+    
     func searchFlickrForTerm(_ searchTerm: String, completion : @escaping (_ results: FlickrSearchResults?, _ error : NSError?) -> Void){
         
         guard let searchURL = flickrSearchURLForSearchTerm(searchTerm) else {

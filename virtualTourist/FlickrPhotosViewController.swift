@@ -10,8 +10,9 @@
 //  create map page view controller
 //  make a pin go to photos page
 
-// stuck on segue to photos. wont show the vc
 //  Use api to display photos from pin
+//  34.04865771697618, -118.25183063251399
+
 //  Add Core-data elements
 //  store photos in core data
 //  add delete pin
@@ -20,8 +21,9 @@
 
 
 import UIKit
+import MapKit
 
-final class FlickrPhotosViewController: UICollectionViewController {
+final class FlickrPhotosViewController: UICollectionViewController, MKMapViewDelegate {
     
     // MARK: - Properties
     fileprivate let reuseIdentifier = "FlickrCell"
@@ -34,9 +36,23 @@ final class FlickrPhotosViewController: UICollectionViewController {
     
     fileprivate let itemsPerRow: CGFloat = 3
     
-    var passedIntext:String = ""
+    var passedIntext:String = "not Sending In A string"
     
+    var passedInPin:CLLocationCoordinate2D? = nil
+ 
+    // MARK: Lifecycle Functions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // thisLocation
+        print("This is the Pin in Phots VC: \(thisPin!)")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("This is the Pre Pin: \(thisPin!)")
+
+    }
 }
+
 
 //func searchPhotos() {
 //    flickrClientInstance.searchPhotos("\(pin.latitude)", longitude: "\(pin.longitude)") { photoURLS, error in
@@ -63,8 +79,9 @@ extension FlickrPhotosViewController : UITextFieldDelegate {
         activityIndicator.frame = textField.bounds
         activityIndicator.startAnimating()
         
-        
-        flickr.searchFlickrForTerm(textField.text!) {
+        //textField.text = "\(thisLocation!)"
+        flickr.searchFlickrForTerm("\(thisPin!.latitude), longitude: \(thisPin!.longitude)") {
+        //flickr.searchFlickrForTerm(textField.text!) {
             results, error in
             
             activityIndicator.removeFromSuperview()
@@ -81,7 +98,7 @@ extension FlickrPhotosViewController : UITextFieldDelegate {
             }
         }
         
-        textField.text = passedIntext
+        
         textField.resignFirstResponder()
         return true
     }

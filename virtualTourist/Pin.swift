@@ -13,15 +13,13 @@ import MapKit
 
 class Pin {
     var coordinate: CLLocationCoordinate2D
-   // var latitude: CLLocationDegrees
-   // var longitude: CLLocationDegrees
-    init(coordinate: CLLocationCoordinate2D
-        //, latitude: CLLocationDegrees, longitude:CLLocationDegrees
-        )
+    var latitude: CLLocationDegrees
+    var longitude: CLLocationDegrees
+    init(coordinate: CLLocationCoordinate2D, latitude: CLLocationDegrees, longitude:CLLocationDegrees)
     {
         self.coordinate = coordinate
-//        self.latitude = latitude
-//        self.longitude = longitude
+        self.latitude = latitude
+        self.longitude = longitude
     }
 
 }
