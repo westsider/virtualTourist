@@ -7,11 +7,14 @@
 //
 //  Store pins on core data
 //  Reload pins on relaunch
+
 //  Save Map Location on relaunch
-//  Delete pinsz
+//  Delete pins
 
 import UIKit
 import MapKit
+import CoreLocation
+import CoreData
 
 class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     
@@ -21,6 +24,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     
     // Flag for editing mode
     var editingPins = false
+    
+    // Core Data
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    
+    // MARK: Retrieve Stored Pins
+    func fetchAllPins() -> [Pin] {
+        
+        // Create the fetch request
+        let fetchRequest = NSFetchRequest<Pin>(entityName: "Pin")
+        
+        // Execute the fetch request
+        do {
+            return try sharedContext.fetch(fetchRequest)
+        } catch {
+            print("error in fetch")
+            return [Pin]()
+        }
+    }
     
     // MARK: Lifecycle methods
     override func viewDidLoad() {
@@ -48,9 +71,47 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPress(getstureRecognizer:)))
         
         uilpgr.minimumPressDuration = 1
-        
+
         mapView.addGestureRecognizer(uilpgr)
+        // Set the map view delegate
+        mapView.delegate = self
+//deleteLabel.isHidden = true
         
+        addSavedPinsToMap()
+        
+    }
+
+//    // When the edit button is clicked, show the 'Done' button and flag the editingPins to true
+//    @IBAction func editClicked(_ sender: UIBarButtonItem) {
+//        
+//        if editingPins == false {
+//            editingPins = true
+//            deleteLabel.isHidden = false
+//            navigationItem.rightBarButtonItem?.title = "Done"
+//            
+//        }
+//            
+//        else if editingPins {
+//            navigationItem.rightBarButtonItem?.title = "Edit"
+//            editingPins = false
+//            deleteLabel.isHidden = true
+//        }
+//        
+//    }
+    
+    // Find all the saved pins and show it on the mapView
+    func addSavedPinsToMap() {
+        
+        pins = fetchAllPins()
+        print("Pin count in core data is \(pins.count)")
+        
+        for pin in pins {
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = pin.coordinate
+            annotation.title = pin.pinTitle
+            mapView.addAnnotation(annotation)
+        }
     }
     
     // MARK: Long Press Sets Pin
@@ -69,11 +130,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         let annotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
-        //let newPin = Pin(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, context: sharedContext)
-        let newPin = Pin(coordinate: annotation.coordinate, latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+        let newPin = Pin(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, context: sharedContext)
         
         // Saving to core data
-        //CoreDataStackManager.sharedInstance().saveContext()
+        CoreDataStackManager.sharedInstance().saveContext()
         
         // Adding the newPin to the pins array
         pins.append(newPin)
@@ -82,8 +142,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         // Adding the newPin to the map
         mapView.addAnnotation(annotation)
         
-        // Downloading photos for new pin (only download it if it's a new pin)
-        //FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is success:\(success) - error:\(error)") }
+// Downloading photos for new pin (only download it if it's a new pin)
+//FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is success:\(success) - error:\(error)") }
         
         // Find out the location name based on the coordinates
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)

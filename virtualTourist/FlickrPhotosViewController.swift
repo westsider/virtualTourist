@@ -26,6 +26,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 final class FlickrPhotosViewController: UICollectionViewController, MKMapViewDelegate {
     
