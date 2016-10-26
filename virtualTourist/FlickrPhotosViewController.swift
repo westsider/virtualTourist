@@ -5,19 +5,23 @@
 //  Created by Warren Hansen on 10/20/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-//  Help with displaying flickr images on collection view here
-//  https://www.raywenderlich.com/136159/uicollectionview-tutorial-getting-started
-//  create map page view controller
-//  make a pin go to photos page
 
-//  Use api to display photos from pin
-//  34.04865771697618, -118.25183063251399
+// Store pins on core data
+// Reload pins on relaunch
+ 
+// Flickr API
+// How do I send a pin to flicker search. Implement into a search
+// Load photos from search
+// Load pin on photos page
+// Save the photos to core data
+// Reload new photos
+ 
+// Delete pins
+ 
+// Save map location ion before quit: applicationWillTerminate may not be the ideal point in the app lifecycle to save lat,lon,zoom, as it only fires when the application is about to be terminated and purged from memory.
+// Since the user navigates the map, a better place to save would be when the user stops navigating the map. See mapView(_:regionDidChangeAnimated:) within MKMapViewDelegate for additional optional MKMapViewmethods.
 
-//  Add Core-data elements
-//  store photos in core data
-//  add delete pin
-//  add reload photos
-//  check against rubric
+
 
 
 import UIKit
@@ -44,25 +48,15 @@ final class FlickrPhotosViewController: UICollectionViewController, MKMapViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         // thisLocation
-        print("This is the Pin in Phots VC: \(thisPin!)")
+       // print("This is the Pin in Phots VC: \(thisPin!)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("This is the Pre Pin: \(thisPin!)")
+       // print("This is the Pre Pin: \(thisPin!)")
 
     }
 }
 
-
-//func searchPhotos() {
-//    flickrClientInstance.searchPhotos("\(pin.latitude)", longitude: "\(pin.longitude)") { photoURLS, error in
-//        guard let photoURLS = photoURLS else {
-//            return
-//        }
-//        self.savePhotos(photoURLS)
-//    }
-//    
-//}
 
 // MARK: - Private
 private extension FlickrPhotosViewController {
@@ -80,8 +74,8 @@ extension FlickrPhotosViewController : UITextFieldDelegate {
         activityIndicator.startAnimating()
         
         //textField.text = "\(thisLocation!)"
-        flickr.searchFlickrForTerm("\(thisPin!.latitude), longitude: \(thisPin!.longitude)") {
-        //flickr.searchFlickrForTerm(textField.text!) {
+        //flickr.searchFlickrForTerm("\(thisPin!.latitude), longitude: \(thisPin!.longitude)") {
+        flickr.searchFlickrForTerm(textField.text!) {
             results, error in
             
             activityIndicator.removeFromSuperview()
