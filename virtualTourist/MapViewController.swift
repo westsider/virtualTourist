@@ -8,7 +8,7 @@
 //  Store pins on core data
 //  Reload pins on relaunch
 //  Save Map Location on relaunch
-//  Delete pin
+//  Delete pins
 
 import UIKit
 import MapKit
@@ -54,6 +54,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     }
     
     // MARK: Long Press Sets Pin
+    // Reference: http://stackoverflow.com/questions/5182082/mkmapview-drop-a-pin-on-touch
     func longPress(getstureRecognizer: UIGestureRecognizer) {
          // If it's in editing mode, do nothing
                 if (editingPins) {
