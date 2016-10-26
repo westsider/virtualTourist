@@ -15,11 +15,6 @@ class CoreDataStackManager {
     
     
     // MARK: - Shared Instance
-    
-    /**
-     *  This class variable provides an easy way to get access
-     *  to a shared instance of the CoreDataStackManager class.
-     */
     class func sharedInstance() -> CoreDataStackManager {
         struct Static {
             static let instance = CoreDataStackManager()
@@ -29,19 +24,15 @@ class CoreDataStackManager {
     }
     
     // MARK: - The Core Data stack. The code has been moved, unaltered, from the AppDelegate.
-    
     lazy var applicationDocumentsDirectory: URL = {
-        
-        print("Instantiating the applicationDocumentsDirectory property")
-        
+//print("Instantiating the applicationDocumentsDirectory property")
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[urls.count-1]
     }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        
-        print("Instantiating the managedObjectModel property")
+//print("Instantiating the managedObjectModel property")
         
         let modelURL = Bundle.main.url(forResource: "VirtualTourist", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!

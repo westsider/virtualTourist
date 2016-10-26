@@ -96,13 +96,13 @@
 		39DE1B611DBAFD5400F5B3F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				397073731DC11FF90025C65B /* VirtualTourist.xcdatamodeld */,
 				395F38051DB9B437007EC90D /* Flickr.swift */,
 				39BDA8391DBEB92800BB9354 /* FlickrConvience.swift */,
 				395F38061DB9B437007EC90D /* FlickrPhoto.swift */,
 				395F38071DB9B437007EC90D /* FlickrSearchResults.swift */,
 				397073841DC133090025C65B /* Photos.swift */,
 				39CBB46C1DBC2B9700FA552B /* Pin.swift */,
+				397073731DC11FF90025C65B /* VirtualTourist.xcdatamodeld */,
 				397073821DC131040025C65B /* CoreDataStackManager.swift */,
 				397073791DC130BA0025C65B /* Catagory+CoreDataProperties.swift */,
 				397073771DC130BA0025C65B /* Photos+CoreDataProperties.swift */,

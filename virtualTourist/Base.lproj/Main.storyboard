@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AWD-o4-9bF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AWD-o4-9bF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -10,7 +10,7 @@
         <scene sceneID="jkA-q0-jCc">
             <objects>
                 <collectionViewController storyboardIdentifier="PhotosView" title="PhotoViewController" id="Mp4-6I-d6s" customClass="FlickrPhotosViewController" customModule="virtualTourist" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="lnH-XT-D4E">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="lnH-XT-D4E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -22,7 +22,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlickrCell" id="lG9-2g-tc0" customClass="FlickrPhotoCell" customModule="virtualTourist" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="88" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -50,7 +50,7 @@
                     <navigationItem key="navigationItem" id="5qF-eW-Ngo">
                         <nil key="title"/>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Search" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" id="ugl-U1-Ip5">
-                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -69,22 +69,59 @@
         <scene sceneID="lmB-aE-Ulz">
             <objects>
                 <viewController storyboardIdentifier="MapView" id="bVq-ag-7A7" customClass="MapViewController" customModule="virtualTourist" customModuleProvider="target" sceneMemberID="viewController">
-                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="V2R-vK-1zz">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BOM-ZM-lFO"/>
+                        <viewControllerLayoutGuide type="bottom" id="L2F-Wm-b4X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cLm-HA-hdq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <connections>
-                            <outlet property="delegate" destination="bVq-ag-7A7" id="TWY-1K-bLS"/>
-                        </connections>
-                    </mapView>
-                    <navigationItem key="navigationItem" id="quD-Gs-mse"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SJv-Gi-Tu9">
+                                <connections>
+                                    <outlet property="delegate" destination="bVq-ag-7A7" id="mXX-0m-jhP"/>
+                                </connections>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Pins To Delete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbv-fF-pds" userLabel="Delete Label">
+                                <color key="backgroundColor" red="0.14307591319084167" green="0.68001633882522583" blue="0.93631958961486816" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="uBB-CO-P8C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SJv-Gi-Tu9" secondAttribute="trailing" id="IJb-We-j73"/>
+                            <constraint firstItem="Zbv-fF-pds" firstAttribute="leading" secondItem="cLm-HA-hdq" secondAttribute="leading" id="PsR-Ui-lpQ"/>
+                            <constraint firstItem="SJv-Gi-Tu9" firstAttribute="leading" secondItem="cLm-HA-hdq" secondAttribute="leading" id="fLO-sz-sed"/>
+                            <constraint firstAttribute="bottom" secondItem="Zbv-fF-pds" secondAttribute="bottom" id="gCO-vP-wbT"/>
+                            <constraint firstItem="SJv-Gi-Tu9" firstAttribute="top" secondItem="BOM-ZM-lFO" secondAttribute="bottom" id="hao-Wj-47X"/>
+                            <constraint firstAttribute="trailing" secondItem="Zbv-fF-pds" secondAttribute="trailing" id="qPo-4q-ARN"/>
+                            <constraint firstAttribute="bottom" secondItem="SJv-Gi-Tu9" secondAttribute="bottom" id="xE9-z7-7EA"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="quD-Gs-mse">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="EFV-NE-V1J">
+                            <connections>
+                                <action selector="editButtonClicked:" destination="bVq-ag-7A7" id="q0S-B5-rkK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="mapView" destination="V2R-vK-1zz" id="24F-3v-4bH"/>
+                        <outlet property="deleteLabel" destination="Zbv-fF-pds" id="261-vn-ReY"/>
+                        <outlet property="editButton" destination="EFV-NE-V1J" id="Pmk-9q-JYD"/>
+                        <outlet property="mapView" destination="SJv-Gi-Tu9" id="ljq-Gp-g4T"/>
                         <segue destination="Mp4-6I-d6s" kind="show" identifier="toThePhotos" id="qCh-IG-5D9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Bd-GS-nth" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4251" y="405"/>
+            <point key="canvasLocation" x="4250.3999999999996" y="404.34782608695656"/>
         </scene>
         <!--Nav Controller-->
         <scene sceneID="mja-4a-dID">

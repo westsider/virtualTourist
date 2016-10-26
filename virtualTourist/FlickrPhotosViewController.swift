@@ -41,9 +41,7 @@ final class FlickrPhotosViewController: UICollectionViewController, MKMapViewDel
     
     fileprivate let itemsPerRow: CGFloat = 3
     
-    var passedIntext:String = "not Sending In A string"
-    
-    var passedInPin:CLLocationCoordinate2D? = nil
+    var pin: Pin? = nil
  
     // MARK: Lifecycle Functions
     override func viewDidLoad() {
