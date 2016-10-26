@@ -8,7 +8,7 @@
 //  Store pins on core data
 //  Reload pins on relaunch
 //  Save Map Location on relaunch
-//  Delete pins
+//  Delete pinsz
 
 import UIKit
 import MapKit
