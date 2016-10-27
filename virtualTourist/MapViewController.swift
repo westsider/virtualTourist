@@ -5,8 +5,7 @@
 //  Created by Warren Hansen on 10/22/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-//  Set up flicker client
-//  search flicker client
+//  pin is being sent to next VC as nil
 //  understand how the search gets done
 
 import UIKit
@@ -50,10 +49,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let latitude: CLLocationDegrees = 34.052235
-        let longitude: CLLocationDegrees = -118.243683
-        let latDelta: CLLocationDegrees = 0.05  // bigger = wider view
-        let lonDelta: CLLocationDegrees = 0.05
+        let latitude: CLLocationDegrees = 33.994275
+        let longitude: CLLocationDegrees = -118.4547197
+        let latDelta: CLLocationDegrees = 0.1  // bigger = wider view
+        let lonDelta: CLLocationDegrees = 0.1
         let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
         let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let region: MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
@@ -101,7 +100,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         }
     }
     
-    // MARK: Long Press Sets Pin
+    // MARK: Set Pin Behavior
     // Reference: http://stackoverflow.com/questions/5182082/mkmapview-drop-a-pin-on-touch
     func longPress(getstureRecognizer: UIGestureRecognizer) {
         // If it's in editing mode, do nothing
@@ -130,8 +129,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             mapView.addAnnotation(annotation)
             
             // MARK:  Downloading photos for new pin (only download it if it's a new pin)
-//            FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is success:\(success) - error:\(error)") }
+           FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in
             
+            print("downloadPhotosForPin is success:\(success) - error:\(error)") }
+            print("New Pin Set and Downloaded \(newPin)")
             // Find out the location name based on the coordinates
             let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
             
@@ -207,11 +208,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         }
     }
     
-    // MARK: Segue to Photos VC
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "toThePhotos" {
-            let photosVC = segue.destination as! FlickrPhotosViewController
-            photosVC.pin = selectedPin
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toThePhotos") {
+            print("<<<<<<<<<<<< func prepare Selected Pin: \(selectedPin)")
+            let viewController = segue.destination as! PhotoAlbumViewController
+            viewController.pin = selectedPin
         }
     }
+    
+//    // MARK: Segue to Photos VC
+//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "toThePhotos" {
+//            let viewController = segue.destination as! PhotoAlbumViewController
+//            viewController.pin = selectedPin
+//            print("<<<<<<<<<<<<<<< Sending pin: \(selectedPin!)")
+//        }
+//    }
 }

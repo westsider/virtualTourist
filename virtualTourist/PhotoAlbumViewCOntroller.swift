@@ -5,7 +5,7 @@
 //  Created by Warren Hansen on 10/27/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-
+//'NSInvalidArgumentException', reason: 'An instance of NSFetchedResultsController requires a fetch request with sort descriptors
 import UIKit
 import MapKit
 import CoreData
@@ -13,11 +13,16 @@ import CoreData
 class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var pin: Pin? = nil
-    
-    // Flag for deleting pictures
     var isDeleting = false
-    
     var editingFlag = false
+    // Array of IndexPath - keeping track of index of selected cells
+    var selectedIndexofCollectionViewCells = [IndexPath]()
+    //  Core Data Convenience
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    // Fetched Results Controller
+    var fetchedResultsController:NSFetchedResultsController<Photos>!
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var bottomButton: UIButton!
@@ -25,48 +30,31 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBOutlet weak var noImagesLabel: UILabel!
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    // Array of IndexPath - keeping track of index of selected cells
-    var selectedIndexofCollectionViewCells = [IndexPath]()
-    
-    
-    // MARK: - Core Data Convenience
-    
-    var sharedContext: NSManagedObjectContext {
-        return CoreDataStackManager.sharedInstance().managedObjectContext
-    }
-    
-    // Mark: - Fetched Results Controller
-    
-    
-    var fetchedResultsController:NSFetchedResultsController<Photos>!
-    
-    // MARK: - Life Cycle
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fetchRequest = NSFetchRequest<Photos>(entityName: "Photos")
-        let NOC = sharedContext
-        
-        fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin!)
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        
-        
-        let frc = NSFetchedResultsController<Photos>(fetchRequest: fetchRequest, managedObjectContext: NOC, sectionNameKeyPath: nil, cacheName: nil)
-        
-        fetchedResultsController = frc
-        
+        if pin != nil {
+            print("<<<<<<<<<<<<<<<<<< pin: \(pin!)")
+        } else {
+            print("<<<<<<<<<<<<<<<<< pin is nil")
+        }
         
         bottomButton.isHidden = false
         noImagesLabel.isHidden = true
-        
-        mapView.delegate = self
-        
         // Load the map
+        mapView.delegate = self
         loadMapView()
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        // Fetch Init
+        let fetchRequest = NSFetchRequest<Photos>(entityName: "Photos")
+        let NOC = sharedContext
+        fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin!) // crash here
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        let frc = NSFetchedResultsController<Photos>(fetchRequest: fetchRequest, managedObjectContext: NOC, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = frc
         // Perform the fetch
         do {
             try fetchedResultsController.performFetch()
@@ -81,7 +69,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         NotificationCenter.default.addObserver(self, selector: #selector(PhotoAlbumViewController.photoReload(_:)), name: NSNotification.Name(rawValue: "downloadPhotoImage.done"), object: nil)
     }
     
-    // Inserting dispatch_async to ensure the closure always run in the main thread
+    // MARK: Inserting dispatch_async to ensure the closure always run in the main thread
     func photoReload(_ notification: Notification) {
         DispatchQueue.main.async(execute: {
             self.collectionView.reloadData()
@@ -95,6 +83,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         })
     }
     
+    // MARK: Re Fetch
     fileprivate func reFetch() {
         do {
             try fetchedResultsController.performFetch()
@@ -103,8 +92,33 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         }
     }
     
+    // MARK: Delete Photo
+    func deletePhoto(_ sender: UIButton){
+        
+        // I want to know if the cell is selected giving the indexPath
+        let indexOfTheItem = sender.layer.value(forKey: "indexPath") as! IndexPath
+        
+        // Get the photo associated with the indexPath
+        let photo = fetchedResultsController.object(at: indexOfTheItem)
+        print("Delete cell selected from 'deletePhoto' is \(photo)")
+        
+        // When user deselected it, remove it from the selectedIndexofCollectionViewCells array
+        if let index = selectedIndexofCollectionViewCells.index(of: indexOfTheItem){
+            selectedIndexofCollectionViewCells.remove(at: index)
+        }
+        
+        // Remove the photo
+        sharedContext.delete(photo)
+        
+        // Save to core data
+        CoreDataStackManager.sharedInstance().saveContext()
+        
+        // Update selected cell
+        reFetch()
+        collectionView.reloadData()
+    }
     
-    // Note: "new' images might overlap with previous collections of images
+    // MARK: Delete Photo
     @IBAction func bottomButtonTapped(_ sender: UIButton) {
         
         // Hiding the button once it's tapped, because I want to finish either deleting or reloading first
@@ -154,30 +168,30 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             CoreDataStackManager.sharedInstance().saveContext()
             
             // 3. Download a new set of photos with the current pin
-//            FlickrClient.sharedInstance().downloadPhotosForPin(pin!, completionHandler: {
-//                success, error in
-//                
-//                if success {
-//                    DispatchQueue.main.async(execute: {
-//                        CoreDataStackManager.sharedInstance().saveContext()
-//                    })
-//                } else {
-//                    DispatchQueue.main.async(execute: {
-//                        print("error downloading a new set of photos")
-//                        self.bottomButton.isHidden = false
-//                    })
-//                }
-//                // Update cells
-//                DispatchQueue.main.async(execute: {
-//                    self.reFetch()
-//                    self.collectionView.reloadData()
-//                })
-//                
-//            })
+            FlickrClient.sharedInstance().downloadPhotosForPin(pin!, completionHandler: {
+                success, error in
+                
+                if success {
+                    DispatchQueue.main.async(execute: {
+                        CoreDataStackManager.sharedInstance().saveContext()
+                    })
+                } else {
+                    DispatchQueue.main.async(execute: {
+                        print("error downloading a new set of photos")
+                        self.bottomButton.isHidden = false
+                    })
+                }
+                // Update cells
+                DispatchQueue.main.async(execute: {
+                    self.reFetch()
+                    self.collectionView.reloadData()
+                })
+                
+            })
         }
     }
     
-    // Load map view for the current pin
+    // MARK: Load map view
     // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
     func loadMapView() {
         
@@ -192,19 +206,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         mapView.selectAnnotation(point, animated: true)
         
     }
-    
-    // Return the number of photos from fetchedResultsController
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        print("Number of photos returned from fetchedResultsController #\(sectionInfo.numberOfObjects)")
-        
-        // If numberOfObjects is not zero, hide the noImagesLabel
-        noImagesLabel.isHidden = sectionInfo.numberOfObjects != 0
-        
-        return sectionInfo.numberOfObjects
-    }
-    
+
+    // MARK:  Edit Button
     @IBAction func editButtonTapped(_ sender: AnyObject) {
         
         if editingFlag == false {
@@ -220,7 +223,24 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         }
         
     }
-    // Remove photos from an album when user select a cell or multiple cells
+    
+    // MARK: CollectionView Functions
+    // Return the number of photos from fetchedResultsController
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        print("Number of photos returned from fetchedResultsController #\(sectionInfo.numberOfObjects)")
+        
+        // If numberOfObjects is not zero, hide the noImagesLabel
+        noImagesLabel.isHidden = sectionInfo.numberOfObjects != 0
+        
+        print("")
+        print("<<<<<<<<<<<<  Nimber of objects: \(sectionInfo.numberOfObjects)")
+        
+        return sectionInfo.numberOfObjects
+    }
+    
+    // MARK:  Remove photos from an album when user select a cell or multiple cells
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
         //self.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: true, completion: nil)
@@ -271,7 +291,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
     }
     
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+    // MARK:  The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
@@ -289,30 +309,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         return cell
     }
     
-    func deletePhoto(_ sender: UIButton){
-        
-        // I want to know if the cell is selected giving the indexPath
-        let indexOfTheItem = sender.layer.value(forKey: "indexPath") as! IndexPath
-        
-        // Get the photo associated with the indexPath
-        let photo = fetchedResultsController.object(at: indexOfTheItem)
-        print("Delete cell selected from 'deletePhoto' is \(photo)")
-        
-        // When user deselected it, remove it from the selectedIndexofCollectionViewCells array
-        if let index = selectedIndexofCollectionViewCells.index(of: indexOfTheItem){
-            selectedIndexofCollectionViewCells.remove(at: index)
-        }
-        
-        // Remove the photo
-        sharedContext.delete(photo)
-        
-        // Save to core data
-        CoreDataStackManager.sharedInstance().saveContext()
-        
-        // Update selected cell
-        reFetch()
-        collectionView.reloadData()
-    }
+
     
     
     
