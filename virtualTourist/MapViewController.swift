@@ -5,6 +5,9 @@
 //  Created by Warren Hansen on 10/22/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
+//  Set up flicker client
+//  search flicker client
+//  understand how the search gets done
 
 import UIKit
 import MapKit
@@ -127,7 +130,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             mapView.addAnnotation(annotation)
             
             // MARK:  Downloading photos for new pin (only download it if it's a new pin)
-            //FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is success:\(success) - error:\(error)") }
+//            FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is success:\(success) - error:\(error)") }
             
             // Find out the location name based on the coordinates
             let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)

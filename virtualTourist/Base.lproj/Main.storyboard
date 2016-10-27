@@ -10,7 +10,7 @@
         <scene sceneID="jkA-q0-jCc">
             <objects>
                 <collectionViewController storyboardIdentifier="PhotosView" title="PhotoViewController" id="Mp4-6I-d6s" customClass="FlickrPhotosViewController" customModule="virtualTourist" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="lnH-XT-D4E">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="lnH-XT-D4E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,16 +49,6 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="5qF-eW-Ngo">
                         <nil key="title"/>
-                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Search" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" id="ugl-U1-Ip5">
-                            <rect key="frame" x="113" y="7" width="150" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                            <connections>
-                                <outlet property="delegate" destination="Mp4-6I-d6s" id="PeH-lr-1JQ"/>
-                            </connections>
-                        </textField>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccK-Od-wmT" userLabel="First Responder" sceneMemberID="firstResponder"/>
