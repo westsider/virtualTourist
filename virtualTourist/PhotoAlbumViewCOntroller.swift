@@ -6,7 +6,9 @@
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
 //  only loading 1 photo
-//  count the array + Open the sql database
+//          let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
+//  print("\r\n <<<<<<<<  VDL Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
+
 
 
 import UIKit

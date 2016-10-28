@@ -9,13 +9,8 @@
 import Foundation
 import CoreData
 
-
-extension Catagory {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Catagory> {
-        return NSFetchRequest<Catagory>(entityName: "Catagory");
-    }
-
-    @NSManaged public var catagoryName: String?
-
+extension Category {
+    
+    @NSManaged var categoryName: String?
+    
 }

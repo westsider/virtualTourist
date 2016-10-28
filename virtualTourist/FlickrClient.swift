@@ -167,8 +167,8 @@ class FlickrClient: NSObject {
     
     func openURL(_ urlString: String) {
         let url = URL(string: urlString)
-        //UIApplication.shared.openURL(url!)
-        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        UIApplication.shared.openURL(url!)
+        //UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     // MARK: - Shared Instance

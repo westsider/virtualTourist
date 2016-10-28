@@ -16,7 +16,7 @@ extension FlickrClient {
         
         var randomPageNumber: Int = 1
         
-//        if let numberPages = pin.pageNumber?.intValue {
+//        if let numberPages = pin.pageNumber.intValue {
 //            if numberPages > 0 {
 //                let pageLimit = min(numberPages, 20)
 //                randomPageNumber = Int(arc4random_uniform(UInt32(pageLimit))) + 1 }

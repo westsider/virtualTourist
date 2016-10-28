@@ -82,13 +82,14 @@
 		39321C111DB7DB19002EA3B3 /* virtualTourist */ = {
 			isa = PBXGroup;
 			children = (
+				39321C1B1DB7DB19002EA3B3 /* LaunchScreen.storyboard */,
+				39321C161DB7DB19002EA3B3 /* Main.storyboard */,
+				397073731DC11FF90025C65B /* VirtualTourist.xcdatamodeld */,
+				39321C1E1DB7DB19002EA3B3 /* Info.plist */,
+				39DE1B631DBAFD6D00F5B3F5 /* Controller */,
 				39DE1B611DBAFD5400F5B3F5 /* Model */,
 				39DE1B621DBAFD6200F5B3F5 /* View */,
-				39DE1B631DBAFD6D00F5B3F5 /* Controller */,
 				39321C191DB7DB19002EA3B3 /* Assets.xcassets */,
-				39321C121DB7DB19002EA3B3 /* AppDelegate.swift */,
-				39321C1B1DB7DB19002EA3B3 /* LaunchScreen.storyboard */,
-				39321C1E1DB7DB19002EA3B3 /* Info.plist */,
 			);
 			path = virtualTourist;
 			sourceTree = "<group>";
@@ -98,7 +99,6 @@
 			children = (
 				397073841DC133090025C65B /* Photos.swift */,
 				39CBB46C1DBC2B9700FA552B /* Pin.swift */,
-				397073731DC11FF90025C65B /* VirtualTourist.xcdatamodeld */,
 				397073821DC131040025C65B /* CoreDataStackManager.swift */,
 				397073791DC130BA0025C65B /* Catagory+CoreDataProperties.swift */,
 				397073771DC130BA0025C65B /* Photos+CoreDataProperties.swift */,
@@ -108,13 +108,22 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
-		39DE1B611DBAFD5400F5B3F5 /* Model */ = {
+		398E925F1DC3DC60004B75E8 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
 				3970738B1DC1649C0025C65B /* FlickrClient.swift */,
 				397073891DC164730025C65B /* Flickr Constants.swift */,
 				39BDA8391DBEB92800BB9354 /* FlickrConvience.swift */,
+				39321C121DB7DB19002EA3B3 /* AppDelegate.swift */,
+			);
+			name = Flickr;
+			sourceTree = "<group>";
+		};
+		39DE1B611DBAFD5400F5B3F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				397073881DC163290025C65B /* Core Data */,
+				398E925F1DC3DC60004B75E8 /* Flickr */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -122,7 +131,6 @@
 		39DE1B621DBAFD6200F5B3F5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				39321C161DB7DB19002EA3B3 /* Main.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -132,8 +140,8 @@
 			children = (
 				39CBB46A1DBBFE0100FA552B /* MapViewController.swift */,
 				3970738D1DC24F310025C65B /* PhotoAlbumViewCOntroller.swift */,
-				39321C2A1DB7F57C002EA3B3 /* PhotoCollectionViewCell.swift */,
 				3970738F1DC24F8C0025C65B /* ImageScrollView.swift */,
+				39321C2A1DB7F57C002EA3B3 /* PhotoCollectionViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -349,10 +357,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 22U4CL887R;
 				INFOPLIST_FILE = virtualTourist/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TradeStrat.net.virtualTourist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -362,10 +372,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 22U4CL887R;
 				INFOPLIST_FILE = virtualTourist/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TradeStrat.net.virtualTourist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
