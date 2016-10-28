@@ -5,8 +5,6 @@
 //  Created by Warren Hansen on 10/22/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-//  pin is being sent to next VC as nil
-//  understand how the search gets done
 
 import UIKit
 import MapKit

@@ -6,8 +6,7 @@
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
 //  only loading 1 photo
-//  count the array
-//  review collection view in udemy
+//  count the array + Open the sql database
 
 
 import UIKit
@@ -71,8 +70,22 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // Subscirbe to notification so photos can be reloaded - catches the notification from FlickrConvenient
         NotificationCenter.default.addObserver(self, selector: #selector(PhotoAlbumViewController.photoReload(_:)), name: NSNotification.Name(rawValue: "downloadPhotoImage.done"), object: nil)
+        
+        /*  things to try to count array
+         // 1. Empty the photo album from the previous set
+         for photo in fetchedResultsController.fetchedObjects! {
+         print(photo)
+         }
+ 
+         
+         FlickrClient.sharedInstance() do stuff
+         
+         */
+        
+        let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
+        print("\r\n <<<<<<<<  VDL Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
     }
-    
+ 
     // MARK: Inserting dispatch_async to ensure the closure always run in the main thread
     func photoReload(_ notification: Notification) {
         DispatchQueue.main.async(execute: {
@@ -178,6 +191,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 if success {
                     DispatchQueue.main.async(execute: {
                         CoreDataStackManager.sharedInstance().saveContext()
+                        let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
+                        print("\r\n <<<<<<<<  Success In downloadphotosforpin Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
                     })
                 } else {
                     DispatchQueue.main.async(execute: {
@@ -213,6 +228,9 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
 
     // MARK:  Edit Button
     @IBAction func editButtonTapped(_ sender: AnyObject) {
+        
+        let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
+        print("\r\n <<<<<<<<  Edit Button Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
         
         if editingFlag == false {
             editingFlag = true

@@ -11,9 +11,9 @@ import CoreData
 
 extension Photos {
 
-//    @nonobjc public class func fetchRequest() -> NSFetchRequest<Photos> {
-//        return NSFetchRequest<Photos>(entityName: "Photos");
-//    }
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Photos> {
+        return NSFetchRequest<Photos>(entityName: "Photos");
+    }
 
     @NSManaged public var filePath: String?
     @NSManaged public var id: String?
