@@ -112,9 +112,6 @@
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1t4-iq-SUp"/>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbp-JP-vIg">
                                                     <state key="normal" title="Del"/>
-                                                    <connections>
-                                                        <action selector="bottomButtonTapped:" destination="FMJ-Az-KiA" eventType="touchUpInside" id="Rvp-y9-LA4"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </view>
@@ -143,6 +140,9 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5r-i1-rXZ">
                                 <state key="normal" title="New Collection"/>
+                                <connections>
+                                    <action selector="bottomButtonTapped:" destination="FMJ-Az-KiA" eventType="touchUpInside" id="7CM-Fw-vjo"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

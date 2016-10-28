@@ -5,7 +5,11 @@
 //  Created by Warren Hansen on 10/27/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-//'NSInvalidArgumentException', reason: 'An instance of NSFetchedResultsController requires a fetch request with sort descriptors
+//  only loading 1 photo
+//  count the array
+//  review collection view in udemy
+
+
 import UIKit
 import MapKit
 import CoreData
@@ -118,7 +122,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         collectionView.reloadData()
     }
     
-    // MARK: Delete Photo
+    // MARK: Reload Photos
     @IBAction func bottomButtonTapped(_ sender: UIButton) {
         
         // Hiding the button once it's tapped, because I want to finish either deleting or reloading first
@@ -234,9 +238,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         // If numberOfObjects is not zero, hide the noImagesLabel
         noImagesLabel.isHidden = sectionInfo.numberOfObjects != 0
         
-        print("")
-        print("<<<<<<<<<<<<  Nimber of objects: \(sectionInfo.numberOfObjects)")
-        
         return sectionInfo.numberOfObjects
     }
     
@@ -296,7 +297,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         let photo = fetchedResultsController.object(at: indexPath)
-        //print("Photo URL from the collection view is \(photo.url)")
+print("Photo URL from the collection view is \(photo.url)")
         
         cell.photoView.image = photo.image
         
