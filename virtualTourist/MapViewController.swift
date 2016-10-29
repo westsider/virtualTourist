@@ -87,7 +87,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     func addSavedPinsToMap() {
         
         pins = fetchAllPins()
-        print("Pin count in core data is \(pins.count)")
+        print("\r\nPin count in core data is \(pins.count)")
         
         for pin in pins {
             
@@ -121,7 +121,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             
             // Adding the newPin to the pins array
             pins.append(newPin)
-            print("Pin Array: \(pins) Count: \(pins.count)")
+            print("\r\n Pin Array: \(pins) Count: \(pins.count)")
             
             // Adding the newPin to the map
             mapView.addAnnotation(annotation)
@@ -129,8 +129,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             // MARK:  Downloading photos for new pin (only download it if it's a new pin)
            FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in
             
-            print("downloadPhotosForPin is success:\(success) - error:\(error)") }
-            print("New Pin Set and Downloaded \(newPin)")
+            print("\r\ndownloadPhotosForPin is success:\(success) - error:\(error)") }
+            print("\r\nNew Pin Set and Downloaded \(newPin)")
             // Find out the location name based on the coordinates
             let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
             
@@ -182,7 +182,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
                 selectedPin = pin
                 
                 if editingPins {
-                    print("Deleting pin - verify core data is deleting as well")
+                    print("\r\n Deleting pin - verify core data is deleting as well")
                     sharedContext.delete(selectedPin!)
                     
                     // Deleting selected pin on map
@@ -208,7 +208,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toThePhotos") {
-            print("<<<<<<<<<<<< func prepare Selected Pin: \(selectedPin)")
+            print("\r\n<<<<<<<<<<< func prepare Selected Pin: \(selectedPin)")
             let viewController = segue.destination as! PhotoAlbumViewController
             viewController.pin = selectedPin
         }

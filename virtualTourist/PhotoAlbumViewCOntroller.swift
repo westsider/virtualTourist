@@ -40,9 +40,9 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         super.viewDidLoad()
         
         if pin != nil {
-            print("<<<<<<<<<<<<<<<<<< pin: \(pin!)")
+            print("\r\n Photos VC: Load pin: \(pin!)")
         } else {
-            print("<<<<<<<<<<<<<<<<< pin is nil")
+            print("\r\n<<<<<<<<<<<<<<<<< pin is nil")
         }
         
         bottomButton.isHidden = false
@@ -73,19 +73,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         // Subscirbe to notification so photos can be reloaded - catches the notification from FlickrConvenient
         NotificationCenter.default.addObserver(self, selector: #selector(PhotoAlbumViewController.photoReload(_:)), name: NSNotification.Name(rawValue: "downloadPhotoImage.done"), object: nil)
         
-        /*  things to try to count array
-         // 1. Empty the photo album from the previous set
-         for photo in fetchedResultsController.fetchedObjects! {
-         print(photo)
-         }
- 
-         
-         FlickrClient.sharedInstance() do stuff
-         
-         */
-        
         let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-        print("\r\n <<<<<<<<  VDL Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
+        print("\r\n <<<<<<<<  Photos VC: Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
     }
  
     // MARK: Inserting dispatch_async to ensure the closure always run in the main thread
@@ -95,7 +84,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             
             // If no photos remaining, show the 'New Collection' button
             let numberRemaining = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-            print("numberRemaining is from photoReload \(numberRemaining)")
+            print("\r\n  Photos VC: numberRemaining is from photoReload \(numberRemaining)")
             if numberRemaining <= 0 {
                 self.bottomButton.isHidden = false
             }
@@ -119,7 +108,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // Get the photo associated with the indexPath
         let photo = fetchedResultsController.object(at: indexOfTheItem)
-        print("Delete cell selected from 'deletePhoto' is \(photo)")
+        print("\r\n  Photos VC: Delete cell selected from 'deletePhoto' is \(photo)")
         
         // When user deselected it, remove it from the selectedIndexofCollectionViewCells array
         if let index = selectedIndexofCollectionViewCells.index(of: indexOfTheItem){
@@ -152,7 +141,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 // Get photo associated with the indexPath.
                 let photo = fetchedResultsController.object(at: indexPath)
                 
-                print("Deleting this -- \(photo)")
+                print("\r\n Photos VC: Deleting this -- \(photo)")
                 
                 // Remove the photo
                 sharedContext.delete(photo)
@@ -194,7 +183,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                     DispatchQueue.main.async(execute: {
                         CoreDataStackManager.sharedInstance().saveContext()
                         let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-                        print("\r\n <<<<<<<<  Success In downloadphotosforpin Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
+                        print("\r\n Photos VC: Success In downloadphotosforpin Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
                     })
                 } else {
                     DispatchQueue.main.async(execute: {
@@ -232,7 +221,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBAction func editButtonTapped(_ sender: AnyObject) {
         
         let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-        print("\r\n <<<<<<<<  Edit Button Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
+        print("\r\n Photos VC: Edit Button Num Photos Downloaded: \(numPhotos)")
         
         if editingFlag == false {
             editingFlag = true
@@ -253,7 +242,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
         let sectionInfo = self.fetchedResultsController.sections![section]
-        print("Number of photos returned from fetchedResultsController #\(sectionInfo.numberOfObjects)")
+        print("\r\n ##### PROBLRM LINE#### Photos VC: Number of photos returned from fetchedResultsController \(sectionInfo.numberOfObjects)")
         
         // If numberOfObjects is not zero, hide the noImagesLabel
         noImagesLabel.isHidden = sectionInfo.numberOfObjects != 0
@@ -296,7 +285,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             // If the selectedIndexofCollectionViewCells array is not empty, show the 'Delete # photo(s)' button
             if selectedIndexofCollectionViewCells.count > 0 {
                 
-                print("Delete array has \(selectedIndexofCollectionViewCells.count) photo(s).")
+                print("\r\n DidSlectItemAt: Delete array has \(selectedIndexofCollectionViewCells.count) photo(s).")
                 if selectedIndexofCollectionViewCells.count == 1{
                     bottomButton.setTitle("Delete \(selectedIndexofCollectionViewCells.count) photo", for: UIControlState())
                 } else {
@@ -317,7 +306,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         let photo = fetchedResultsController.object(at: indexPath)
-print("Photo URL from the collection view is \(photo.url)")
+print("\r\n cellForItemAt: Photo URL from the collection view is \(photo.url)")
         
         cell.photoView.image = photo.image
         
