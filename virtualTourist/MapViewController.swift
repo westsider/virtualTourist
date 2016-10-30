@@ -28,7 +28,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
-    // MARK: Retrieve Stored Pins
+    // MARK: - Retrieve Stored Pins
     func fetchAllPins() -> [Pin] {
         
         // Create the fetch request
@@ -43,7 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         }
     }
     
-    // MARK: Lifecycle methods
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,7 +69,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         
     }
     
-    // MARK:  When the edit button is clicked, show the 'Done' button and flag the editingPins to true
+    // MARK: - edit button
     @IBAction func editButtonClicked(_ sender: UIBarButtonItem) {
         if editingPins == false {
             editingPins = true
@@ -83,7 +83,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         }
     }
     
-    // MARK:  Find all the saved pins and show it on the mapView
+    // MARK:  - Add saved pins to the mapView
     func addSavedPinsToMap() {
         
         pins = fetchAllPins()
@@ -98,7 +98,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         }
     }
     
-    // MARK: Set Pin Behavior
+    // MARK: - Set Pin Behavior
     // Reference: http://stackoverflow.com/questions/5182082/mkmapview-drop-a-pin-on-touch
     func longPress(getstureRecognizer: UIGestureRecognizer) {
         // If it's in editing mode, do nothing
@@ -129,6 +129,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             // MARK:  Downloading photos for new pin (only download it if it's a new pin)
            FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in
             
+            print("\r\n <<<<<<<<<<<< STEP 1 >>>>>>>>>>>>>>>>>>")
             print("\r\ndownloadPhotosForPin is success:\(success) - error:\(error)") }
             print("\r\nNew Pin Set and Downloaded \(newPin)")
             // Find out the location name based on the coordinates
@@ -164,14 +165,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         return annotationView
     }
     
-    // MARK:  Selecting Pin Behavior
+    // MARK: -  Selecting Pin Behavior
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         mapView.deselectAnnotation(view.annotation, animated: true)
         guard let annotation = view.annotation else { /* no annotation */ return }
         
         let title = annotation.title!
-        print(annotation.title)
+        print(annotation.title! as Any)
         
         selectedPin = nil
         
@@ -201,11 +202,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
                     }
                     // Move to the Phone Album View Controller
                     self.performSegue(withIdentifier: "toThePhotos", sender: nil)
+                    print("\r\n <<<<<<<<<<<< STEP 2 >>>>>>>>>>>>>>>>>>")
+                    print("\r\n performSegue(withIdentifier: toThePhotos")
                 }
             }
         }
     }
     
+    // MARK: - Segue to Photos View Controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toThePhotos") {
             print("\r\n<<<<<<<<<<< func prepare Selected Pin: \(selectedPin)")
@@ -213,13 +217,5 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             viewController.pin = selectedPin
         }
     }
-    
-//    // MARK: Segue to Photos VC
-//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "toThePhotos" {
-//            let viewController = segue.destination as! PhotoAlbumViewController
-//            viewController.pin = selectedPin
-//            print("<<<<<<<<<<<<<<< Sending pin: \(selectedPin!)")
-//        }
-//    }
+
 }

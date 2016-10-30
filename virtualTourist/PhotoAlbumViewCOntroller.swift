@@ -35,10 +35,11 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBOutlet weak var noImagesLabel: UILabel!
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    // MARK: Life Cycle
+    // MARK: - Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("\r\n <<<<<<<<<<<< STEP 3 LOAD pin >>>>>>>>>>>>>>>>>>")
         if pin != nil {
             print("\r\n Photos VC: Load pin: \(pin!)")
         } else {
@@ -54,15 +55,23 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         collectionView.dataSource = self
         
         // Fetch Init
+        print("\r\n <<<<<<<<<<<< STEP 4 Fetch >>>>>>>>>>>>>>>>>>")
         let fetchRequest = NSFetchRequest<Photos>(entityName: "Photos")
+        print("\r\n fetchRequest: \(fetchRequest)")
+        
         let NOC = sharedContext
         fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin!) // crash here
+        print("\r\n fetchRequest.predicate: \(fetchRequest.predicate)")
+        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        print("\r\n fetchRequest.sortDescriptors: \(fetchRequest.sortDescriptors)")
+        
         let frc = NSFetchedResultsController<Photos>(fetchRequest: fetchRequest, managedObjectContext: NOC, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController = frc
         // Perform the fetch
         do {
             try fetchedResultsController.performFetch()
+            print("\r\n Fetch Successful but dont know how to prove")
         } catch let error as NSError {
             print("\(error)")
         }
@@ -74,10 +83,10 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         NotificationCenter.default.addObserver(self, selector: #selector(PhotoAlbumViewController.photoReload(_:)), name: NSNotification.Name(rawValue: "downloadPhotoImage.done"), object: nil)
         
         let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-        print("\r\n <<<<<<<<  Photos VC: Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
+        print("\r\n <<<<<<<<  Photos VC: Yet Num Photos Downloaded =  \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
     }
  
-    // MARK: Inserting dispatch_async to ensure the closure always run in the main thread
+    // MARK: - Inserting dispatch_async to ensure run in the main thread
     func photoReload(_ notification: Notification) {
         DispatchQueue.main.async(execute: {
             self.collectionView.reloadData()
@@ -91,7 +100,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         })
     }
     
-    // MARK: Re Fetch
+    // MARK: - Re Fetch
     fileprivate func reFetch() {
         do {
             try fetchedResultsController.performFetch()
@@ -100,7 +109,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         }
     }
     
-    // MARK: Delete Photo
+    // MARK: - Delete Photo
     func deletePhoto(_ sender: UIButton){
         
         // I want to know if the cell is selected giving the indexPath
@@ -126,7 +135,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         collectionView.reloadData()
     }
     
-    // MARK: Reload Photos
+    // MARK: - Reload Photos
     @IBAction func bottomButtonTapped(_ sender: UIButton) {
         
         // Hiding the button once it's tapped, because I want to finish either deleting or reloading first
@@ -201,7 +210,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         }
     }
     
-    // MARK: Load map view
+    // MARK: - Load map view
     // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
     func loadMapView() {
         
@@ -250,7 +259,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         return sectionInfo.numberOfObjects
     }
     
-    // MARK:  Remove photos from an album when user select a cell or multiple cells
+    // MARK:  - Collection View Functions
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
         //self.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: true, completion: nil)
@@ -297,16 +306,15 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 isDeleting = false
             }
             
-        } // End of else if editingFlag = true
+        }
         
     }
     
-    // MARK:  The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         let photo = fetchedResultsController.object(at: indexPath)
-print("\r\n cellForItemAt: Photo URL from the collection view is \(photo.url)")
+        print("\r\n cellForItemAt: Photo URL from the collection view is \(photo.url)")
         
         cell.photoView.image = photo.image
         
@@ -319,8 +327,4 @@ print("\r\n cellForItemAt: Photo URL from the collection view is \(photo.url)")
         return cell
     }
     
-
-    
-    
-    
-} // The end
+}

@@ -84,12 +84,12 @@
 			children = (
 				39321C1B1DB7DB19002EA3B3 /* LaunchScreen.storyboard */,
 				39321C161DB7DB19002EA3B3 /* Main.storyboard */,
-				397073731DC11FF90025C65B /* VirtualTourist.xcdatamodeld */,
 				39321C1E1DB7DB19002EA3B3 /* Info.plist */,
 				39DE1B631DBAFD6D00F5B3F5 /* Controller */,
 				39DE1B611DBAFD5400F5B3F5 /* Model */,
 				39DE1B621DBAFD6200F5B3F5 /* View */,
 				39321C191DB7DB19002EA3B3 /* Assets.xcassets */,
+				39321C121DB7DB19002EA3B3 /* AppDelegate.swift */,
 			);
 			path = virtualTourist;
 			sourceTree = "<group>";
@@ -97,6 +97,7 @@
 		397073881DC163290025C65B /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				397073731DC11FF90025C65B /* VirtualTourist.xcdatamodeld */,
 				397073841DC133090025C65B /* Photos.swift */,
 				39CBB46C1DBC2B9700FA552B /* Pin.swift */,
 				397073821DC131040025C65B /* CoreDataStackManager.swift */,
@@ -114,7 +115,6 @@
 				3970738B1DC1649C0025C65B /* FlickrClient.swift */,
 				397073891DC164730025C65B /* Flickr Constants.swift */,
 				39BDA8391DBEB92800BB9354 /* FlickrConvience.swift */,
-				39321C121DB7DB19002EA3B3 /* AppDelegate.swift */,
 			);
 			name = Flickr;
 			sourceTree = "<group>";
@@ -131,6 +131,7 @@
 		39DE1B621DBAFD6200F5B3F5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				39321C2A1DB7F57C002EA3B3 /* PhotoCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -141,7 +142,6 @@
 				39CBB46A1DBBFE0100FA552B /* MapViewController.swift */,
 				3970738D1DC24F310025C65B /* PhotoAlbumViewCOntroller.swift */,
 				3970738F1DC24F8C0025C65B /* ImageScrollView.swift */,
-				39321C2A1DB7F57C002EA3B3 /* PhotoCollectionViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Warren Hansen";
 				TargetAttributes = {
 					39321C0E1DB7DB19002EA3B3 = {
@@ -278,6 +278,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -327,6 +328,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
