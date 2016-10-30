@@ -17,7 +17,6 @@ class Pin: NSManagedObject {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    // In Swift, superclass initializers are not available to subclasses, so it is necessary to include this initializer and call the superclass' implementation of it.
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
     }

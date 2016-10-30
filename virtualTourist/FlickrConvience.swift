@@ -11,7 +11,7 @@ import CoreData
 
 extension FlickrClient {
     
-    // Initiates a download from Flickr
+    // Mark: - Initiates a download from Flickr
     func downloadPhotosForPin(_ pin: Pin, completionHandler: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
         var randomPageNumber: Int = 1
@@ -40,7 +40,7 @@ extension FlickrClient {
             URLKeys.PerPage : 21 as AnyObject
         ]
         
-        // Make GET request for get photos for pin
+        // Mark: - Make GET request for get photos for pin
         taskForGETMethodWithParameters(parameters, completionHandler: {
             results, error in
             
@@ -95,7 +95,7 @@ extension FlickrClient {
         })
     }
     
-    // Download save image and change file path for photo
+    // Mark: - Download save image and change file path for photo
     func downloadPhotoImage(_ photo: Photos, completionHandler: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
         let imageURLString = photo.url
@@ -134,7 +134,6 @@ extension FlickrClient {
     }
     
     // MARK: - Core Data Convenience
-    
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }

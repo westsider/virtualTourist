@@ -24,7 +24,6 @@ class FlickrClient: NSObject {
     }
     
     // MARK: - GET request
-    
     func taskForGETMethodWithParameters(_ parameters: [String : AnyObject],completionHandler: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
         // Build the URL and configure the request
@@ -49,7 +48,7 @@ class FlickrClient: NSObject {
         
     }
     
-    // MARK: POST
+    // MARK: - POST
     func taskForGETMethod(_ urlString: String,completionHandler: @escaping (_ result: Data?, _ error: NSError?) -> Void) {
         
         // Create the request
@@ -76,7 +75,6 @@ class FlickrClient: NSObject {
     }
     
     // MARK: - Helpers
-    
     // Substitute the key for the value that is contained within the method name
     class func subtituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
         if method.range(of: "{\(key)}") != nil {
@@ -86,7 +84,7 @@ class FlickrClient: NSObject {
         }
     }
     
-    // Given raw JSON, return a usable Foundation object
+    // Mark: - Given raw JSON, return a usable Foundation object
     class func parseJSONWithCompletionHandler(_ data: Data, completionHandler: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
         var parsingError: NSError?
@@ -110,7 +108,7 @@ class FlickrClient: NSObject {
     }
     
     
-    // Given a dictionary of parameters, convert to a string for a url
+    // Mark: - Given a dictionary of parameters, convert to a string for a url
     class func escapedParameters(_ parameters: [String : AnyObject]) -> String {
         
         var urlVars = [String]()
@@ -153,7 +151,6 @@ class FlickrClient: NSObject {
     }
     
     // MARK: - Show error alert
-    
     func showAlert(_ message: NSError, viewController: AnyObject) {
         let errMessage = message.localizedDescription
         
@@ -172,7 +169,6 @@ class FlickrClient: NSObject {
     }
     
     // MARK: - Shared Instance
-    
     class func sharedInstance() -> FlickrClient {
         
         struct Singleton {

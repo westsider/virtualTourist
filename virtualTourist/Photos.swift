@@ -51,8 +51,6 @@ class Photos: NSManagedObject {
     }
     
     //MARK: - Delete file when deleting a managed object
-    
-    // Explicitely deletes the underlying files
     override func prepareForDeletion(){
         super.prepareForDeletion()
         
