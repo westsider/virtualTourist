@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageScrollView: UIViewController {
+class ImageDetailView: UIViewController {
     
     
     @IBOutlet weak var myImageView: UIImageView!

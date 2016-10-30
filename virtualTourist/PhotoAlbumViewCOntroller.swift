@@ -266,7 +266,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         if editingFlag == false{
             
-            let myImageViewPage: ImageScrollView = self.storyboard?.instantiateViewController(withIdentifier: "ImageScrollView") as! ImageScrollView
+            let myImageViewPage: ImageDetailView = self.storyboard?.instantiateViewController(withIdentifier: "ImageDetailView") as! ImageDetailView
             let photo = fetchedResultsController.object(at: indexPath)
             
             // Pass the selected image
