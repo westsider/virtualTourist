@@ -5,6 +5,9 @@
 //  Created by Warren Hansen on 10/22/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 
+//  Check against Rubric
+//  Add sattelite
+
 import UIKit
 import MapKit
 import CoreLocation

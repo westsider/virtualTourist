@@ -18,7 +18,6 @@ class ImageDetailView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(selectedImage)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

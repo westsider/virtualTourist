@@ -5,7 +5,6 @@
 //  Created by Warren Hansen on 10/27/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-//  Check Against Rubrik
 
 import UIKit
 import MapKit
