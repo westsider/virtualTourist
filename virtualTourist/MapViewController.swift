@@ -51,6 +51,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Virtual Tourist"
+        
         // add user annotation
         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPress(getstureRecognizer:)))
         uilpgr.minimumPressDuration = 1
