@@ -5,8 +5,14 @@
 //  Created by Warren Hansen on 10/22/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 
+//  move map up to view delete
+//  draggble pins?
 //  Check against Rubric
+//  remove print statements
 //  Add sattelite
+
+//  Extra Features: I added a Detail view wich allows the user to see the image better, This changes the way deleting a photo works. The used must tap edit to delete an image. I hope this is OK for the rubric because it allows extra functionality, 
+//  Sattelite and hybrid view
 
 import UIKit
 import MapKit

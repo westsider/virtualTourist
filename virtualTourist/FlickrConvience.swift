@@ -49,6 +49,7 @@ extension FlickrClient {
             } else {
                 
                 // Response dictionary
+// create photo dictionary as String:AnyObject
                 if let photosDictionary = results?.value(forKey: JSONResponseKeys.Photos) as? [String: AnyObject],
                     let photosArray = photosDictionary[JSONResponseKeys.Photo] as? [[String : AnyObject]],
                     let numberOfPhotoPages = photosDictionary[JSONResponseKeys.Pages] as? Int {
