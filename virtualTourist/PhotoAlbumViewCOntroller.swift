@@ -5,9 +5,7 @@
 //  Created by Warren Hansen on 10/27/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-//  only loading 1 photo
-//          let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-//  print("\r\n <<<<<<<<  VDL Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
+//  Check Against Rubrik
 
 
 
