@@ -7,8 +7,6 @@
 //
 //  Check Against Rubrik
 
-
-
 import UIKit
 import MapKit
 import CoreData

@@ -4,7 +4,6 @@
 //
 //  Created by Warren Hansen on 10/22/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
-//
 
 import UIKit
 import MapKit
@@ -28,6 +27,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
+     var savedRegionLoaded = false
+    
     // MARK: - Retrieve Stored Pins
     func fetchAllPins() -> [Pin] {
         
@@ -47,15 +48,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let latitude: CLLocationDegrees = 33.994275
-        let longitude: CLLocationDegrees = -118.4547197
-        let latDelta: CLLocationDegrees = 0.1  // bigger = wider view
-        let lonDelta: CLLocationDegrees = 0.1
-        let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
-        let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let region: MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
-        
         // add user annotation
         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPress(getstureRecognizer:)))
         uilpgr.minimumPressDuration = 1
@@ -68,6 +60,49 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         addSavedPinsToMap()
         
     }
+    
+    // MARK: - Load Map Region
+    override func viewDidAppear(_ animated: Bool) {
+        if !savedRegionLoaded {
+            if let savedRegion = UserDefaults.standard.object(forKey: "savedMapRegion") as? [String: Double] {
+                let center = CLLocationCoordinate2D(latitude: savedRegion["mapRegionCenterLat"]!, longitude: savedRegion["mapRegionCenterLon"]!)
+                let span = MKCoordinateSpan(latitudeDelta: savedRegion["mapRegionSpanLatDelta"]!, longitudeDelta: savedRegion["mapRegionSpanLonDelta"]!)
+                mapView.region = MKCoordinateRegion(center: center, span: span)
+            }
+            savedRegionLoaded = true
+        }
+    }
+    
+    // MARK: - Region Has Changes
+    func mapViewRegionDidChangeFromUserInteraction() -> Bool {
+        let view = self.mapView.subviews[0]
+        //  Look through gesture recognizers to determine whether this region change is from user interaction
+        if let gestureRecognizers = view.gestureRecognizers {
+            for recognizer in gestureRecognizers {
+                if (recognizer.state == UIGestureRecognizerState.began || recognizer.state == UIGestureRecognizerState.ended) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    // Mark: - Save Map Region
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("region did change to \(mapView.region.center)")
+ 
+        if mapViewRegionDidChangeFromUserInteraction() {
+            let regionToSave = [
+                "mapRegionCenterLat": mapView.region.center.latitude,
+                "mapRegionCenterLon": mapView.region.center.longitude,
+                "mapRegionSpanLatDelta": mapView.region.span.latitudeDelta,
+                "mapRegionSpanLonDelta": mapView.region.span.longitudeDelta
+            ]
+            UserDefaults.standard.set(regionToSave, forKey: "savedMapRegion")
+        }
+    }
+    
+
     
     // MARK: - edit button
     @IBAction func editButtonClicked(_ sender: UIBarButtonItem) {
@@ -82,6 +117,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             deleteLabel.isHidden = true
         }
     }
+    
     
     // MARK:  - Add saved pins to the mapView
     func addSavedPinsToMap() {
