@@ -62,6 +62,4 @@ extension FlickrClient {
         static let Fail = "fail"
         static let Ok = "ok"
     }
-    
-    
 }

@@ -24,5 +24,4 @@ class PhotoCollectionViewCell: UICollectionViewCell {
             activityIndicator.startAnimating()
         }
     }
-    
 }

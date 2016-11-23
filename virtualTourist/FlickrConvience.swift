@@ -15,7 +15,7 @@ extension FlickrClient {
     func downloadPhotosForPin(_ pin: Pin, completionHandler: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
         var randomPageNumber: Int = 1
-
+        
         let numberPages = pin.pageNumber
         if numberPages > 0 {
             let pageLimit = min(numberPages, 20)
@@ -43,7 +43,7 @@ extension FlickrClient {
             } else {
                 
                 // Response dictionary
-// create photo dictionary as String:AnyObject
+                // create photo dictionary as String:AnyObject
                 if let photosDictionary = results?.value(forKey: JSONResponseKeys.Photos) as? [String: AnyObject],
                     let photosArray = photosDictionary[JSONResponseKeys.Photo] as? [[String : AnyObject]],
                     let numberOfPhotoPages = photosDictionary[JSONResponseKeys.Pages] as? Int {
@@ -131,6 +131,4 @@ extension FlickrClient {
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
-    
-    
 }

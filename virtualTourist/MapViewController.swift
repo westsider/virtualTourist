@@ -4,15 +4,9 @@
 //
 //  Created by Warren Hansen on 10/22/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
+//
+//  Extra Features: I added a Detail view wich allows the user to see the image better, This changes the way deleting a photo works. The used must tap edit to delete an image. I hope this is OK for the rubric because it allows extra functionality. Preloaded photos.
 
-//  move map up to view delete
-//  draggble pins?
-//  Check against Rubric
-//  remove print statements
-//  Add sattelite
-
-//  Extra Features: I added a Detail view wich allows the user to see the image better, This changes the way deleting a photo works. The used must tap edit to delete an image. I hope this is OK for the rubric because it allows extra functionality, 
-//  Sattelite and hybrid view
 
 import UIKit
 import MapKit
@@ -36,7 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
-     var savedRegionLoaded = false
+    var savedRegionLoaded = false
     
     // MARK: - Retrieve Stored Pins
     func fetchAllPins() -> [Pin] {
@@ -69,7 +63,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         deleteLabel.isHidden = true
         // load prior pins
         addSavedPinsToMap()
-        
     }
     
     // MARK: - Load Map Region
@@ -97,11 +90,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         }
         return false
     }
-
+    
     // Mark: - Save Map Region
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("region did change to \(mapView.region.center)")
- 
+        
         if mapViewRegionDidChangeFromUserInteraction() {
             let regionToSave = [
                 "mapRegionCenterLat": mapView.region.center.latitude,
@@ -112,8 +105,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             UserDefaults.standard.set(regionToSave, forKey: "savedMapRegion")
         }
     }
-    
-
     
     // MARK: - edit button
     @IBAction func editButtonClicked(_ sender: UIBarButtonItem) {
@@ -168,17 +159,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             
             // Adding the newPin to the pins array
             pins.append(newPin)
-            print("\r\n Pin Array: \(pins) Count: \(pins.count)")
             
             // Adding the newPin to the map
             mapView.addAnnotation(annotation)
             
             // MARK:  Downloading photos for new pin (only download it if it's a new pin)
-           FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in
-            
-            print("\r\n <<<<<<<<<<<< STEP 1 >>>>>>>>>>>>>>>>>>")
-            print("\r\ndownloadPhotosForPin is success:\(success) - error:\(error)") }
-            print("\r\nNew Pin Set and Downloaded \(newPin)")
+            FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in }
+          
             // Find out the location name based on the coordinates
             let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
             
@@ -219,7 +206,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         guard let annotation = view.annotation else { /* no annotation */ return }
         
         let title = annotation.title!
-        print(annotation.title! as Any)
         
         selectedPin = nil
         
@@ -230,7 +216,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
                 selectedPin = pin
                 
                 if editingPins {
-                    print("\r\n Deleting pin - verify core data is deleting as well")
                     sharedContext.delete(selectedPin!)
                     
                     // Deleting selected pin on map
@@ -249,8 +234,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
                     }
                     // Move to the Phone Album View Controller
                     self.performSegue(withIdentifier: "toThePhotos", sender: nil)
-                    print("\r\n <<<<<<<<<<<< STEP 2 >>>>>>>>>>>>>>>>>>")
-                    print("\r\n performSegue(withIdentifier: toThePhotos")
                 }
             }
         }
@@ -259,10 +242,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     // MARK: - Segue to Photos View Controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toThePhotos") {
-            print("\r\n<<<<<<<<<<< func prepare Selected Pin: \(selectedPin)")
             let viewController = segue.destination as! PhotoAlbumViewController
             viewController.pin = selectedPin
         }
     }
-
 }

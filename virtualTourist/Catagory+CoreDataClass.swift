@@ -11,7 +11,5 @@ import CoreData
 
 class Category: NSManagedObject {
     
-    // TODO: - Use catagory to classify photos
-    
 }
 

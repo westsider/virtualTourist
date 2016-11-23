@@ -52,7 +52,6 @@ class FlickrClient: NSObject {
     func taskForGETMethod(_ urlString: String,completionHandler: @escaping (_ result: Data?, _ error: NSError?) -> Void) {
         
         // Create the request
-        //let request = NSMutableURLRequest(url: URL(string: urlString)!) as URLRequest
         let request = URLRequest(url: URL(string: urlString)!)
         
         // Make the request
@@ -75,7 +74,6 @@ class FlickrClient: NSObject {
     }
     
     // MARK: - Helpers
-    // Substitute the key for the value that is contained within the method name
     class func subtituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
         if method.range(of: "{\(key)}") != nil {
             return method.replacingOccurrences(of: "{\(key)}", with: value)
@@ -106,7 +104,6 @@ class FlickrClient: NSObject {
         }
         
     }
-    
     
     // Mark: - Given a dictionary of parameters, convert to a string for a url
     class func escapedParameters(_ parameters: [String : AnyObject]) -> String {
@@ -165,7 +162,6 @@ class FlickrClient: NSObject {
     func openURL(_ urlString: String) {
         let url = URL(string: urlString)
         UIApplication.shared.openURL(url!)
-        //UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     // MARK: - Shared Instance

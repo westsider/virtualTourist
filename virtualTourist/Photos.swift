@@ -69,7 +69,4 @@ class Photos: NSManagedObject {
             }
         } else { print("filepath is empty")}
     }
-    
-    
 }
-

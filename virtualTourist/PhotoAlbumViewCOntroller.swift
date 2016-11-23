@@ -34,13 +34,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("\r\n <<<<<<<<<<<< STEP 3 LOAD pin >>>>>>>>>>>>>>>>>>")
-        if pin != nil {
-            print("\r\n Photos VC: Load pin: \(pin!)")
-        } else {
-            print("\r\n<<<<<<<<<<<<<<<<< pin is nil")
-        }
-        
         bottomButton.isHidden = false
         noImagesLabel.isHidden = true
         // Load the map
@@ -50,23 +43,18 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         collectionView.dataSource = self
         
         // Fetch Init
-        print("\r\n <<<<<<<<<<<< STEP 4 Fetch >>>>>>>>>>>>>>>>>>")
         let fetchRequest = NSFetchRequest<Photos>(entityName: "Photos")
-        print("\r\n fetchRequest: \(fetchRequest)")
         
         let NOC = sharedContext
         fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin!) // crash here
-        print("\r\n fetchRequest.predicate: \(fetchRequest.predicate)")
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        print("\r\n fetchRequest.sortDescriptors: \(fetchRequest.sortDescriptors)")
         
         let frc = NSFetchedResultsController<Photos>(fetchRequest: fetchRequest, managedObjectContext: NOC, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController = frc
         // Perform the fetch
         do {
             try fetchedResultsController.performFetch()
-            print("\r\n Fetch Successful but dont know how to prove")
         } catch let error as NSError {
             print("\(error)")
         }
@@ -76,11 +64,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // Subscirbe to notification so photos can be reloaded - catches the notification from FlickrConvenient
         NotificationCenter.default.addObserver(self, selector: #selector(PhotoAlbumViewController.photoReload(_:)), name: NSNotification.Name(rawValue: "downloadPhotoImage.done"), object: nil)
-        
-        let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-        print("\r\n <<<<<<<<  Photos VC: Yet Num Photos Downloaded =  \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
     }
- 
+    
     // MARK: - Inserting dispatch_async to ensure run in the main thread
     func photoReload(_ notification: Notification) {
         DispatchQueue.main.async(execute: {
@@ -88,7 +73,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             
             // If no photos remaining, show the 'New Collection' button
             let numberRemaining = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-            print("\r\n  Photos VC: numberRemaining is from photoReload \(numberRemaining)")
             if numberRemaining <= 0 {
                 self.bottomButton.isHidden = false
             }
@@ -112,7 +96,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // Get the photo associated with the indexPath
         let photo = fetchedResultsController.object(at: indexOfTheItem)
-        print("\r\n  Photos VC: Delete cell selected from 'deletePhoto' is \(photo)")
         
         // When user deselected it, remove it from the selectedIndexofCollectionViewCells array
         if let index = selectedIndexofCollectionViewCells.index(of: indexOfTheItem){
@@ -145,11 +128,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 // Get photo associated with the indexPath.
                 let photo = fetchedResultsController.object(at: indexPath)
                 
-                print("\r\n Photos VC: Deleting this -- \(photo)")
-                
                 // Remove the photo
                 sharedContext.delete(photo)
-                
             }
             
             // Empty the array of indexPath after deletion
@@ -206,7 +186,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     }
     
     // MARK: - Load map view
-    // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
+    // I used this reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
     func loadMapView() {
         
         let point = MKPointAnnotation()
@@ -220,7 +200,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         mapView.selectAnnotation(point, animated: true)
         
     }
-
+    
     // MARK:  Edit Button
     @IBAction func editButtonTapped(_ sender: AnyObject) {
         
@@ -246,7 +226,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
         let sectionInfo = self.fetchedResultsController.sections![section]
-        print("\r\n ##### PROBLRM LINE#### Photos VC: Number of photos returned from fetchedResultsController \(sectionInfo.numberOfObjects)")
         
         // If numberOfObjects is not zero, hide the noImagesLabel
         noImagesLabel.isHidden = sectionInfo.numberOfObjects != 0
@@ -309,7 +288,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         let photo = fetchedResultsController.object(at: indexPath)
-        print("\r\n cellForItemAt: Photo URL from the collection view is \(photo.url)")
         
         cell.photoView.image = photo.image
         
@@ -321,5 +299,4 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         return cell
     }
-    
 }
