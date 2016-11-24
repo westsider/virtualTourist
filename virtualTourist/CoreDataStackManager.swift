@@ -23,7 +23,7 @@ class CoreDataStackManager {
         return Static.instance
     }
     
-    // MARK: - The Core Data stack. The code has been moved, unaltered, from the AppDelegate.
+    // MARK: - The Core Data stack.
     lazy var applicationDocumentsDirectory: URL = {
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[urls.count-1]

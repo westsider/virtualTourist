@@ -10,7 +10,8 @@ import Foundation
 import CoreData
 
 extension FlickrClient {
-    
+
+// TODO: - Change this to binaryData
     // Mark: - Initiates a download from Flickr
     func downloadPhotosForPin(_ pin: Pin, completionHandler: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
@@ -58,6 +59,7 @@ extension FlickrClient {
                         guard let photoURLString = photoDictionary[URLValues.URLMediumPhoto] as? String else {
                             print ("error, photoDictionary)"); continue}
                         
+// Photos Model appears to be URL, Pin, Context
                         // Create the Photos model
                         let newPhoto = Photos(photoURL: photoURLString, pin: pin, context: self.sharedContext)
                         

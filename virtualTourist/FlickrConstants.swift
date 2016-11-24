@@ -1,5 +1,5 @@
 //
-//  Flickr Constants.swift
+//  FlickrConstants.swift
 //  virtualTourist
 //
 //  Created by Warren Hansen on 10/26/16.
@@ -56,7 +56,6 @@ extension FlickrClient {
     }
     
     // MARK: - JSON Response Values
-    
     struct JSONResponseValues {
         
         static let Fail = "fail"

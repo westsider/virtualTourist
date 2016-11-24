@@ -4,7 +4,7 @@
 //
 //  Created by Warren Hansen on 10/26/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
-//
+//  Photo object need to  images stored as Binary Type in thenentity with the “Allows External Storage” option active?
 
 import Foundation
 import CoreData
@@ -28,6 +28,7 @@ class Photos: NSManagedObject {
             let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             let pathArray = [dirPath, fileName]
             let fileURL = NSURL.fileURL(withPathComponents: pathArray)
+// this is where the url needs to be a binary type
             
             return UIImage(contentsOfFile: fileURL!.path)
         }

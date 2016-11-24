@@ -5,8 +5,12 @@
 //  Created by Warren Hansen on 10/22/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-//  Extra Features: I added a Detail view wich allows the user to see the image better, This changes the way deleting a photo works. The used must tap edit to delete an image. I hope this is OK for the rubric because it allows extra functionality. Preloaded photos.
+//  Extra Features: I added a detail view which allows the user to see the image better. This changes the way deleting a photo works. The used must tap edit to delete an image. I hope this is OK for the rubric because it allows extra functionality. I also preloaded photos before segue to the collection view.
 
+//  photos are supposed to be stored in the Core Data as NSData (the entity's attribute should use Binary Data) and the option, "Allows External Storage
+
+//  where is the photo stored in this code == FlickrClient.sharedInstance().downloadPhotosForPin(newPin) 
+//  change it to binary data
 
 import UIKit
 import MapKit
