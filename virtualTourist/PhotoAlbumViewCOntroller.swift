@@ -164,11 +164,11 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 success, error in
                 
                 if success {
-                    DispatchQueue.main.async(execute: {
+                   // DispatchQueue.main.async(execute: {
                         CoreDataStackManager.sharedInstance().saveContext()
                         let numPhotos = FlickrClient.sharedInstance().numberOfPhotoDownloaded
                         print("\r\n Photos VC: Success In downloadphotosforpin Num Photos Downloaded: \(numPhotos) >>>>>>>>>>>>>>>> \r\n")
-                    })
+                   // })
                 } else {
                     DispatchQueue.main.async(execute: {
                         print("error downloading a new set of photos")
