@@ -11,7 +11,7 @@ import MapKit
 import CoreData
 
 class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
-    
+    var imageCache = NSCache<AnyObject, AnyObject>()
     var pin: Pin? = nil
     var isDeleting = false
     var editingFlag = false
@@ -244,7 +244,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             let photo = fetchedResultsController.object(at: indexPath)
             
             // Pass the selected image
-            myImageViewPage.selectedImage = photo.url!
+            myImageViewPage.imageData = photo.imageData as! Data
             
             self.navigationController?.pushViewController(myImageViewPage, animated: true)
         }
@@ -289,6 +289,21 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         let photo = fetchedResultsController.object(at: indexPath)
         
+        //        let cacheKey = indexPath.row
+        //        if(self.imageCache.object(forKey: cacheKey as AnyObject) != nil){
+        //            cell.photoView.image = self.imageCache.object(forKey: cacheKey as AnyObject) as? UIImage
+        //        }else{
+        //
+        //            DispatchQueue.global(qos: .userInitiated).async {
+        //
+        //                        let image: UIImage = UIImage(data: photo.imageData as! Data)!
+        //                        self.imageCache.setObject(image, forKey: cacheKey as AnyObject)
+        //
+        //                DispatchQueue.main.async {
+        //                   cell.photoView.image = image
+        //                }
+        //            }
+        //        }
         cell.photoView.image = photo.image
         
         cell.deleteButton.isHidden = true
@@ -299,4 +314,5 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         return cell
     }
+    
 }

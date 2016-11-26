@@ -14,7 +14,7 @@ class ImageDetailView: UIViewController {
     @IBOutlet weak var myImageView: UIImageView!
     
     var selectedImage: String = ""
-    
+    var imageData = Data()
     override func viewDidLoad() {
         super.viewDidLoad()
         print(selectedImage)
@@ -24,11 +24,11 @@ class ImageDetailView: UIViewController {
         super.viewWillAppear(animated)
         
         // ToDo: - I should probably list the title of the image
-        let imageUrl = URL(string:self.selectedImage)
-        let imageData = try? Data(contentsOf: imageUrl!)
-        if (imageData != nil)
-        {
-            self.myImageView.image  = UIImage(data: imageData!)
-        }
+        //        let imageUrl = URL(string:self.selectedImage)
+        //        let imageData = try? Data(contentsOf: imageUrl!)
+        //        if (imageData != nil)
+        //        {
+        self.myImageView.image  = UIImage(data: imageData as Data)
+        //        }
     }
 }

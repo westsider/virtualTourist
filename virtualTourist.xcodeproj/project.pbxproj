@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D24DA211DEA0877000DADF7 /* Photos -UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24DA201DEA0877000DADF7 /* Photos -UIImage.swift */; };
 		39321C131DB7DB19002EA3B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39321C121DB7DB19002EA3B3 /* AppDelegate.swift */; };
 		39321C181DB7DB19002EA3B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39321C161DB7DB19002EA3B3 /* Main.storyboard */; };
 		39321C1A1DB7DB19002EA3B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39321C191DB7DB19002EA3B3 /* Assets.xcassets */; };
@@ -29,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D24DA1F1DEA07BE000DADF7 /* virtualTourist-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "virtualTourist-Bridging-Header.h"; sourceTree = "<group>"; };
+		0D24DA201DEA0877000DADF7 /* Photos -UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photos -UIImage.swift"; sourceTree = "<group>"; };
 		39321C0F1DB7DB19002EA3B3 /* virtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = virtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39321C121DB7DB19002EA3B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39321C171DB7DB19002EA3B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 				39DE1B621DBAFD6200F5B3F5 /* View */,
 				39DE1B631DBAFD6D00F5B3F5 /* Controller */,
 				39321C191DB7DB19002EA3B3 /* Assets.xcassets */,
+				0D24DA1F1DEA07BE000DADF7 /* virtualTourist-Bridging-Header.h */,
 				A6E9B9891DC58D0B00163819 /* Supporting FIles */,
 			);
 			path = virtualTourist;
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				397073731DC11FF90025C65B /* VirtualTourist.xcdatamodeld */,
+				0D24DA201DEA0877000DADF7 /* Photos -UIImage.swift */,
 				397073841DC133090025C65B /* Photos.swift */,
 				39CBB46C1DBC2B9700FA552B /* Pin.swift */,
 				397073821DC131040025C65B /* CoreDataStackManager.swift */,
@@ -240,6 +245,7 @@
 				39BDA83A1DBEB92800BB9354 /* FlickrConvience.swift in Sources */,
 				3970737F1DC130BA0025C65B /* Catagory+CoreDataProperties.swift in Sources */,
 				39321C2B1DB7F57C002EA3B3 /* PhotoCollectionViewCell.swift in Sources */,
+				0D24DA211DEA0877000DADF7 /* Photos -UIImage.swift in Sources */,
 				39CBB46B1DBBFE0100FA552B /* MapViewController.swift in Sources */,
 				3970738A1DC164730025C65B /* FlickrConstants.swift in Sources */,
 				3970738C1DC1649C0025C65B /* FlickrClient.swift in Sources */,

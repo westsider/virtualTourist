@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 
 extension FlickrClient {
-
-// TODO: - Change this to binaryData
+    
+    // TODO: - Change this to binaryData
     // Mark: - Initiates a download from Flickr
     func downloadPhotosForPin(_ pin: Pin, completionHandler: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
@@ -59,7 +59,7 @@ extension FlickrClient {
                         guard let photoURLString = photoDictionary[URLValues.URLMediumPhoto] as? String else {
                             print ("error, photoDictionary)"); continue}
                         
-// Photos Model appears to be URL, Pin, Context
+                        // Photos Model appears to be URL, Pin, Context
                         // Create the Photos model
                         let newPhoto = Photos(photoURL: photoURLString, pin: pin, context: self.sharedContext)
                         
@@ -103,25 +103,16 @@ extension FlickrClient {
             // If there is an error - set file path to error to show blank image
             if let error = error {
                 print("Error from downloading images \(error.localizedDescription )")
-                photo.filePath = "error"
+                // photo.filePath = "error"
                 completionHandler(false, error)
                 
             } else {
                 
                 if let result = result {
                     
-                    // Get file name and file url
-                    let fileName = (imageURLString! as NSString).lastPathComponent
-                    let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                    let pathArray = [dirPath, fileName]
-                    let fileURL = NSURL.fileURL(withPathComponents: pathArray)!
-                    //print(fileURL)
+                    photo.imageData = result as NSData?
                     
-                    // Save file
-                    FileManager.default.createFile(atPath: fileURL.path, contents: result, attributes: nil)
                     
-                    // Update the Photos model
-                    photo.filePath = fileURL.path
                     
                     completionHandler(true, nil)
                 }

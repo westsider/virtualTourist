@@ -57,6 +57,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         
         navigationItem.title = "Virtual Tourist"
         
+        //        let convertQueue = dispatch_queue_create("convertQueue", DISPATCH_QUEUE_CONCURRENT)
+        //        let saveQueue = dispatch_queue_create("saveQueue", DISPATCH_QUEUE_CONCURRENT)
+        
         // add user annotation
         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPress(getstureRecognizer:)))
         uilpgr.minimumPressDuration = 1
@@ -169,7 +172,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             
             // MARK:  Downloading photos for new pin (only download it if it's a new pin)
             FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in }
-          
+            
             // Find out the location name based on the coordinates
             let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
             
