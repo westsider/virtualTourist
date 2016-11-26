@@ -7,8 +7,6 @@
 //
 //  Extra Features: I added a detail view which allows the user to see the image better. This changes the way deleting a photo works. The used must tap edit to delete an image. I hope this is OK for the rubric because it allows extra functionality. I also preloaded photos before segue to the collection view.
 
-//  make changes from instructor
-
 import UIKit
 import MapKit
 import CoreLocation
@@ -202,6 +200,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         
         return annotationView
     }
+
     
     // MARK: -  Selecting Pin Behavior
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {

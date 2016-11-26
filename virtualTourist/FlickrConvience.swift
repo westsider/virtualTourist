@@ -10,8 +10,7 @@ import Foundation
 import CoreData
 
 extension FlickrClient {
-    
-    // TODO: - Change this to binaryData
+
     // Mark: - Initiates a download from Flickr
     func downloadPhotosForPin(_ pin: Pin, completionHandler: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
@@ -111,9 +110,6 @@ extension FlickrClient {
                 if let result = result {
                     
                     photo.imageData = result as NSData?
-                    
-                    
-                    
                     completionHandler(true, nil)
                 }
             }

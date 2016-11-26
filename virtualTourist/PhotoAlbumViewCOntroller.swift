@@ -287,26 +287,13 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
-        let photo = fetchedResultsController.object(at: indexPath)
         
-        //        let cacheKey = indexPath.row
-        //        if(self.imageCache.object(forKey: cacheKey as AnyObject) != nil){
-        //            cell.photoView.image = self.imageCache.object(forKey: cacheKey as AnyObject) as? UIImage
-        //        }else{
-        //
-        //            DispatchQueue.global(qos: .userInitiated).async {
-        //
-        //                        let image: UIImage = UIImage(data: photo.imageData as! Data)!
-        //                        self.imageCache.setObject(image, forKey: cacheKey as AnyObject)
-        //
-        //                DispatchQueue.main.async {
-        //                   cell.photoView.image = image
-        //                }
-        //            }
-        //        }
+        let photo = fetchedResultsController.object(at: indexPath)
+
         cell.photoView.image = photo.image
         
         cell.deleteButton.isHidden = true
+        
         cell.deleteButton.layer.setValue(indexPath, forKey: "indexPath")
         
         // Trigger the action 'deletePhoto' when the button is tapped
